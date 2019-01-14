@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  performance: MyString
+  total: 1
+  sold: 1
+
+two:
+  performance: MyString
+  total: 1
+  sold: 1
