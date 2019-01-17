@@ -37,24 +37,6 @@ index do
     filter :comment
 
   form do |f|
-    # f.inputs do
-    #   f.has_many :users do |t|
-    #     t.input :name
-    #   end
-    # end
-    
-    f.inputs do
-      f.has_many :stages do |u|
-        u.input :performance
-      end
-    end
-    
-    f.inputs do
-      f.has_many :types do |v|
-        v.input :kind
-      end
-    end
-      
     f.inputs do
       f.input :count
       f.input :b_name
@@ -63,5 +45,4 @@ index do
     end
     f.actions
   end
-
 end
