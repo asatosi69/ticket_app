@@ -18,9 +18,15 @@ permit_params :count, :b_name, :b_mail, :comment, :user_id, :stage_id, :type_id,
 index do
     selectable_column
     id_column
-    column :ticket.user.name
-    column :ticket.stage.performance
-    column :ticket.type.kind
+    column User.human_attribute_name(:email) do |t|
+      t.user.email
+    end
+    column Stage.human_attribute_name(:performance) do |t|
+      t.stage.performance
+    end
+    column Type.human_attribute_name(:kind) do |t|
+      t.type.kind
+    end
     column :count
     column :b_name
     column :b_mail
