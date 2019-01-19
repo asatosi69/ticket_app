@@ -46,6 +46,7 @@ index do
       f.input :b_name
       f.input :b_mail
       f.input :comment
+      f.input :comment2
     end
     f.actions
   end
