@@ -44,6 +44,7 @@ index do
       f.input :comment
       # NOTE: emailをnameに変更することでnameを表示できるが、nameが現状必須項目でない かつ nameがない場合は選択肢に表示できないので、emailを出すようにしています。nameにする場合は、User.nameが必須で入るようにvalidationを入れる必要があります。
       f.input :user_id, as: :select, collection: User.pluck(:email, :id).to_h
+      f.input :stage_id, as: :select, collection: Stage.pluck(:performance, :id).to_h
     end
     f.actions
   end
