@@ -24,9 +24,5 @@ ActiveAdmin.register User do
     end
     f.actions
   end
-  sidebar 'User Details', only: [:show] do
-    ul do
-      li link_to 'Tickets', admin_user_tickets_path(resource)
-    end
-  end
+
 end
