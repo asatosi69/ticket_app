@@ -12,7 +12,7 @@ ActiveAdmin.register Ticket do
 #   permitted
 # end
 
-permit_params :count, :b_name, :b_mail, :comment, users_attributes: [:name], stages_attributes: [:performance], types_attributes: [:kind]
+permit_params :count, :b_name, :b_mail, :comment, :user_id, :stage_id, :type_id, :comment2, users_attributes: [:name], stages_attributes: [:performance], types_attributes: [:kind]
 
 
 index do
