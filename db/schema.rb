@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190119123218) do
+ActiveRecord::Schema.define(version: 20190123112022) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -29,9 +29,10 @@ ActiveRecord::Schema.define(version: 20190119123218) do
   create_table "stages", force: :cascade do |t|
     t.string "performance"
     t.integer "total"
-    t.integer "sold"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deadline"
+    t.boolean "end_flag", default: false
   end
 
   create_table "tickets", force: :cascade do |t|
@@ -55,6 +56,7 @@ ActiveRecord::Schema.define(version: 20190119123218) do
     t.integer "seat"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "price"
   end
 
   create_table "users", force: :cascade do |t|

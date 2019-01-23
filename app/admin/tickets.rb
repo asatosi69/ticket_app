@@ -31,21 +31,22 @@ index do
     column :b_name
     column :b_mail
     column :comment
+    column :comment2 #comment2 を追加しました(2019/1/22)
     actions
   end
 
     filter :user_name, as: :string
     filter :stage_performance, as: :string
     filter :type_kind, as: :string
-    filter :count
+    # filter :count コメント化しました(2019/1/22)
     filter :b_name
-    filter :b_mail
-    filter :comment
+    # filter :b_mail コメント化しました(2019/1/22)
+    filter :comment2 # comment から comment2 に変更しました(2019/1/22)
 
   form do |f|
     f.inputs do
       # NOTE: emailをnameに変更することでnameを表示できるが、nameが現状必須項目でない かつ nameがない場合は選択肢に表示できないので、emailを出すようにしています。nameにする場合は、User.nameが必須で入るようにvalidationを入れる必要があります。
-      f.input :user_id, as: :select, collection: User.pluck(:email, :id).to_h
+      f.input :user_id, as: :select, collection: User.pluck(:name, :id).to_h #nameを入力必須にしたので、pluck内の『:email』を『:name』に変更しました。(2019/1/22)
       f.input :stage_id, as: :select, collection: Stage.pluck(:performance, :id).to_h
       f.input :type_id, as: :select, collection: Type.pluck(:kind, :id).to_h
       f.input :count

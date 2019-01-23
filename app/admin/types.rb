@@ -20,16 +20,19 @@ index do
     id_column
     column :kind
     column :seat
+    column :price #この行をを追加しました(2019/1/22)
     actions
   end
 
   filter :kind
   filter :seat
+  filter :price #この行をを追加しました(2019/1/22)
 
   form do |f|
     f.inputs do
       f.input :kind
       f.input :seat
+      f.input :price #この行をを追加しました(2019/1/22)
     end
     f.actions
   end
