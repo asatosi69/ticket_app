@@ -35,9 +35,9 @@ index do
     actions
   end
 
-    filter :user_name, as: :string
-    filter :stage_performance, as: :string
-    filter :type_kind, as: :string
+    filter :user_name, as: :string, label: User.human_attribute_name(:name)
+    filter :stage_performance, as: :string, label: Stage.human_attribute_name(:performance)
+    filter :type_kind, as: :string, label: Type.human_attribute_name(:kind)
     # filter :count コメント化しました(2019/1/22)
     filter :b_name
     # filter :b_mail コメント化しました(2019/1/22)
