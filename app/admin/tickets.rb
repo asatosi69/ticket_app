@@ -18,8 +18,8 @@ permit_params :count, :b_name, :b_mail, :comment, :user_id, :stage_id, :type_id,
 index do
     selectable_column
     id_column
-    column User.human_attribute_name(:email) do |t|
-      t.user.email
+    column User.human_attribute_name(:name) do |t|
+      t.user.name
     end
     column Stage.human_attribute_name(:performance) do |t|
       t.stage.performance
@@ -56,5 +56,18 @@ index do
       f.input :comment2
     end
     f.actions
+  end
+  
+  show :title => 'チケット' do  
+  attributes_table do
+      row :user_id, as: :select, collection: User.pluck(:name, :id).to_h
+      row :stage_id, as: :select, collection: Stage.pluck(:performance, :id).to_h
+      row :type_id, as: :select, collection: Type.pluck(:kind, :id).to_h
+      row :count
+      row :b_name
+      row :b_mail
+      row :comment
+      row :comment2
+    end
   end
 end

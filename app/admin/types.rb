@@ -12,7 +12,10 @@ ActiveAdmin.register Type do
 #   permitted
 # end
 
-permit_params :kind, :seat
+
+  
+
+permit_params :kind, :seat, :price
 
 
 index do
@@ -28,7 +31,8 @@ index do
   filter :seat
   filter :price #この行をを追加しました(2019/1/22)
 
-  form do |f|
+
+form do |f|
     f.inputs do
       f.input :kind
       f.input :seat
@@ -36,5 +40,14 @@ index do
     end
     f.actions
   end
+  
+  
+show title: :kind do  
+  attributes_table do
+      row :kind
+      row :seat
+      row :price
+    end
+end
 
 end

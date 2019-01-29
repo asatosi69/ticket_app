@@ -12,7 +12,7 @@ ActiveAdmin.register Stage do
 #   permitted
 # end
 
-permit_params :performance, :total
+permit_params :performance, :total, :deadline, :end_flag
 
   index do
     selectable_column
@@ -38,5 +38,14 @@ permit_params :performance, :total
     end
     f.actions
   end
+  
+  show title: :performance do  
+  attributes_table do
+      row :performance
+      row :total
+      row :deadline
+      row :end_flag
+    end
+end
   
 end
