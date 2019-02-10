@@ -23,6 +23,4 @@ class User < ApplicationRecord
   has_many :tickets
   
   validates :name, presence: true #この行を追加しました(2019/1/22)
-
-  enum role: { general: 10, admin: 90 }
 end
