@@ -8,6 +8,7 @@ class Ability
     else
       # Ticketは、自身のものだけは管理できる
       can :manage, Ticket, user: user
+      can :create, Ticket
     end
     # Define abilities for the passed in user here. For example:
     #
