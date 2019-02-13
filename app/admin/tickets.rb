@@ -49,6 +49,7 @@ index do
       if current_user.admin?
         f.input :user_id, as: :select, collection: User.pluck(:name, :id).to_h #nameを入力必須にしたので、pluck内の『:email』を『:name』に変更しました。(2019/1/22)
       else
+        f.input :user_name, input_html: { value: current_user.name, disabled: true }
         f.input :user_id, input_html: { value: current_user.id }, as: :hidden
       end
       f.input :stage_id, as: :select, collection: Stage.pluck(:performance, :id).to_h
