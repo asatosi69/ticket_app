@@ -46,7 +46,11 @@ index do
   form do |f|
     f.inputs do
       # NOTE: emailをnameに変更することでnameを表示できるが、nameが現状必須項目でない かつ nameがない場合は選択肢に表示できないので、emailを出すようにしています。nameにする場合は、User.nameが必須で入るようにvalidationを入れる必要があります。
-      f.input :user_id, as: :select, collection: User.pluck(:name, :id).to_h #nameを入力必須にしたので、pluck内の『:email』を『:name』に変更しました。(2019/1/22)
+      if current_user.admin?
+        f.input :user_id, as: :select, collection: User.pluck(:name, :id).to_h #nameを入力必須にしたので、pluck内の『:email』を『:name』に変更しました。(2019/1/22)
+      else
+        f.input :user_id, input_html: { value: current_user.id }, as: :hidden
+      end
       f.input :stage_id, as: :select, collection: Stage.pluck(:performance, :id).to_h
       f.input :type_id, as: :select, collection: Type.pluck(:kind, :id).to_h
       f.input :count

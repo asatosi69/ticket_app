@@ -60,4 +60,4 @@ ja:
         stage_id: 公演
         type_id: チケット種別
 
-
+  access_denined: 許可されていない操作が実行されました。
