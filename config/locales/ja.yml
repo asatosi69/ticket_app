@@ -59,5 +59,6 @@ ja:
         user_id: 取扱者
         stage_id: 公演
         type_id: チケット種別
+        user_name: 取扱者名
 
   access_denined: 許可されていない操作が実行されました。
