@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def access_denied(_exception)
+  def access_denied(_exception = nil)
     redirect_to admin_tickets_path, alert: I18n.t('access_denined')
   end
 
