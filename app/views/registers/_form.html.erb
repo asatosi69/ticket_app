@@ -1,4 +1,4 @@
-<%= form_with(model: register, local: true) do |form| %>
+<%= form_with(model: register, url: register_user_path, local: true) do |form| %>
   <% if register.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(register.errors.count, "error") %> prohibited this register from being saved:</h2>
@@ -11,10 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id, id: :register_user_id %>
-  </div>
+  <%= form.hidden_field :user_id, id: :register_user_id, value: register.user_id %>
 
   <div class="field">
     <%= form.label :count %>
@@ -33,12 +30,12 @@
 
   <div class="field">
     <%= form.label :stage_id %>
-    <%= form.number_field :stage_id, id: :register_stage_id %>
+    <%= form.select :stage_id, Stage.all.map { |t| [t.performance, t.id]} %>
   </div>
 
   <div class="field">
     <%= form.label :type_id %>
-    <%= form.number_field :type_id, id: :register_type_id %>
+    <%= form.select :type_id, Type.all.map { |t| [t.kind, t.id]} %>
   </div>
 
   <div class="field">
