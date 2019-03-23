@@ -13,44 +13,44 @@
 
   <%= form.hidden_field :user_id, id: :register_user_id, value: register.user_id %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :count %>
-    <%= form.number_field :count, id: :register_count %>
+    <%= form.number_field :count, id: :register_count, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :b_name %>
-    <%= form.text_field :b_name, id: :register_b_name %>
+    <%= form.text_field :b_name, id: :register_b_name, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :b_email %>
-    <%= form.text_field :b_email, id: :register_b_email %>
+    <%= form.text_field :b_email, id: :register_b_email, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :stage_id %>
-    <%= form.select :stage_id, Stage.all.map { |t| [t.performance, t.id]} %>
+    <%= form.select :stage_id, Stage.all.map { |t| [t.performance, t.id]}, {}, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :type_id %>
-    <%= form.select :type_id, Type.all.map { |t| [t.kind, t.id]} %>
+    <%= form.select :type_id, Type.all.map { |t| [t.kind, t.id]}, {},  class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :comment %>
-    <%= form.text_area :comment, id: :register_comment %>
+    <%= form.text_area :comment, id: :register_comment, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :state %>
-    <%= form.number_field :state, id: :register_state %>
+    <%= form.number_field :state, id: :register_state, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :ticket_id %>
-    <%= form.number_field :ticket_id, id: :register_ticket_id %>
+    <%= form.number_field :ticket_id, id: :register_ticket_id, class: 'form-control' %>
   </div>
 
   <div class="actions">
