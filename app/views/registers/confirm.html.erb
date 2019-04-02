@@ -1,3 +1,9 @@
+<h1>
+  お申し込み内容確認
+</h1>
+
+お申し込みいただいた内容は以下の通りです。ご確認ください。
+
 <%= form_with(model: register, url: register_confirm_user_path(register.user_id), local: true) do |form| %>
   <% if register.errors.any? %>
     <div id="error_explanation">

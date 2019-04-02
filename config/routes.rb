@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :users, only: [] do
     member do
       get :register, to: 'registers#new'
+      post :register_confirm, to: 'registers#confirm'
     end
   end
 
