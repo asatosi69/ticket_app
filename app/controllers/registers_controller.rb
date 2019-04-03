@@ -1,6 +1,7 @@
 class RegistersController < ApplicationController
 
   def new
+    return redirect_to 'https://google.co.jp' if User.where(id: params[:id]).blank?
     @register = Register.new(user_id: params[:id])
   end
 
