@@ -4,59 +4,48 @@
 
 お申し込みいただいた内容は以下の通りです。ご確認ください。
 
-<%= form_with(model: register, url: register_confirm_user_path(register.user_id), local: true) do |form| %>
-  <% if register.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(register.errors.count, "error") %> prohibited this register from being saved:</h2>
+<%= form_with(model: @register, url: register_confirm_user_path(@register.user_id), local: true) do |form| %>
 
-      <ul>
-      <% register.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <%= form.hidden_field :user_id, id: :register_user_id, value: register.user_id %>
+  <%= form.hidden_field :user_id, id: :register_user_id, value: @register.user_id %>
 
   <div class="field">
     <%= form.label :count %>
-    <%= form.number_field :count, id: :register_count %>
+    <%= form.number_field :count, id: :register_count, disabled: true %>
   </div>
 
   <div class="field">
     <%= form.label :b_name %>
-    <%= form.text_field :b_name, id: :register_b_name %>
+    <%= form.text_field :b_name, id: :register_b_name, disabled: true %>
   </div>
 
   <div class="field">
     <%= form.label :b_email %>
-    <%= form.text_field :b_email, id: :register_b_email %>
+    <%= form.text_field :b_email, id: :register_b_email, disabled: true %>
   </div>
 
   <div class="field">
     <%= form.label :stage_id %>
-    <%= form.select :stage_id, Stage.all.map { |t| [t.performance, t.id]} %>
+    <%= form.select :stage_id, Stage.all.map { |t| [t.performance, t.id]}, {}, disabled: true %>
   </div>
 
   <div class="field">
     <%= form.label :type_id %>
-    <%= form.select :type_id, Type.all.map { |t| [t.kind, t.id]} %>
+    <%= form.select :type_id, Type.all.map { |t| [t.kind, t.id]}, {}, disabled: true %>
   </div>
 
   <div class="field">
     <%= form.label :comment %>
-    <%= form.text_area :comment, id: :register_comment %>
+    <%= form.text_area :comment, id: :register_comment, disabled: true %>
   </div>
 
   <div class="field">
     <%= form.label :state %>
-    <%= form.number_field :state, id: :register_state %>
+    <%= form.number_field :state, id: :register_state, disabled: true %>
   </div>
 
   <div class="field">
     <%= form.label :ticket_id %>
-    <%= form.number_field :ticket_id, id: :register_ticket_id %>
+    <%= form.number_field :ticket_id, id: :register_ticket_id, disabled: true %>
   </div>
 
   <div class="actions">
