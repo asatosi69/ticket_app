@@ -19,6 +19,16 @@
   </div>
 
   <div class="form-group">
+    <%= form.label :stage%>
+    <%= form.select :stage_id, Stage.all.map { |t| [t.performance, t.id]}, {}, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :type%>
+    <%= form.select :type_id, Type.all.map { |t| [t.kind, t.id]}, {},  class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
     <%= form.label :count %>
     <%= form.number_field :count, id: :register_count, class: 'form-control' %>
   </div>
@@ -31,16 +41,6 @@
   <div class="form-group">
     <%= form.label :b_email %>
     <%= form.text_field :b_email, id: :register_b_email, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :stage%>
-    <%= form.select :stage_id, Stage.all.map { |t| [t.performance, t.id]}, {}, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :type%>
-    <%= form.select :type_id, Type.all.map { |t| [t.kind, t.id]}, {},  class: 'form-control' %>
   </div>
 
   <div class="form-group">
