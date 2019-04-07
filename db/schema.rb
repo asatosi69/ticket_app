@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190309090335) do
+ActiveRecord::Schema.define(version: 20190407083724) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20190309090335) do
     t.integer "stage_id"
     t.integer "type_id"
     t.text "comment"
-    t.integer "state"
+    t.integer "state", default: 0
     t.integer "ticket_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
