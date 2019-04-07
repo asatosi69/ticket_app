@@ -13,6 +13,16 @@ class RegistersController < ApplicationController
     end
   end
 
+  def to_confirm
+    @register = Register.find(params[:register][:register_id])
+    if @register.generate_ticket
+      render action: :thankyou
+    end
+  end
+
+  def thankyou
+  end
+
   private
 
   def register_params

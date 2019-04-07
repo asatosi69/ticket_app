@@ -4,9 +4,9 @@
 
 お申し込みいただいた内容は以下の通りです。ご確認ください。
 
-<%= form_with(model: @register, url: register_confirm_user_path(@register.user_id), local: true) do |form| %>
+<%= form_with(model: @register, url: register_to_confirm_user_path(@register.user_id), local: true) do |form| %>
 
-  <%= form.hidden_field :user_id, id: :register_user_id, value: @register.user_id %>
+  <%= form.hidden_field :register_id, id: :register_id, value: @register.id %>
 
   <div class="field">
     <%= form.label :count %>

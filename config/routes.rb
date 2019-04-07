@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     member do
       get :register, to: 'registers#new'
       post :register_confirm, to: 'registers#confirm'
+      patch :register_to_confirm, to: 'registers#to_confirm'
+      get :thankyou, to: 'registers#thankyou'
     end
   end
 
