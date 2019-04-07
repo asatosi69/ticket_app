@@ -10,42 +10,32 @@
 
   <div class="field">
     <%= form.label :count %>
-    <%= form.number_field :count, id: :register_count, disabled: true %>
+    <%= form.number_field :count, id: :register_count, disabled: true, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :b_name %>
-    <%= form.text_field :b_name, id: :register_b_name, disabled: true %>
+    <%= form.text_field :b_name, id: :register_b_name, disabled: true, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :b_email %>
-    <%= form.text_field :b_email, id: :register_b_email, disabled: true %>
+    <%= form.text_field :b_email, id: :register_b_email, disabled: true, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :stage_id %>
-    <%= form.select :stage_id, Stage.all.map { |t| [t.performance, t.id]}, {}, disabled: true %>
+    <%= form.select :stage_id, Stage.all.map { |t| [t.performance, t.id]}, {}, disabled: true, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :type_id %>
-    <%= form.select :type_id, Type.all.map { |t| [t.kind, t.id]}, {}, disabled: true %>
+    <%= form.select :type_id, Type.all.map { |t| [t.kind, t.id]}, {}, disabled: true, class: 'form-control' %>
   </div>
 
   <div class="field">
     <%= form.label :comment %>
-    <%= form.text_area :comment, id: :register_comment, disabled: true %>
-  </div>
-
-  <div class="field">
-    <%= form.label :state %>
-    <%= form.number_field :state, id: :register_state, disabled: true %>
-  </div>
-
-  <div class="field">
-    <%= form.label :ticket_id %>
-    <%= form.number_field :ticket_id, id: :register_ticket_id, disabled: true %>
+    <%= form.text_area :comment, id: :register_comment, disabled: true, class: 'form-control' %>
   </div>
 
   <div class="actions">
