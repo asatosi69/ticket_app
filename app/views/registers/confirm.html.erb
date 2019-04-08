@@ -1,0 +1,44 @@
+<h1>
+  お申し込み内容確認
+</h1>
+
+お申し込みいただいた内容は以下の通りです。ご確認ください。
+
+<%= form_with(model: @register, url: register_to_confirm_user_path(@register.user_id), local: true) do |form| %>
+
+  <%= form.hidden_field :register_id, id: :register_id, value: @register.id %>
+
+  <div class="field">
+    <%= form.label :count %>
+    <%= form.number_field :count, id: :register_count, disabled: true, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :b_name %>
+    <%= form.text_field :b_name, id: :register_b_name, disabled: true, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :b_email %>
+    <%= form.text_field :b_email, id: :register_b_email, disabled: true, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :stage_id %>
+    <%= form.select :stage_id, Stage.all.map { |t| [t.performance, t.id]}, {}, disabled: true, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type_id %>
+    <%= form.select :type_id, Type.all.map { |t| [t.kind, t.id]}, {}, disabled: true, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :comment %>
+    <%= form.text_area :comment, id: :register_comment, disabled: true, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -60,5 +60,12 @@ ja:
         stage_id: 公演
         type_id: チケット種別
         user_name: 取扱者名
+      register:
+        count: チケット枚数
+        b_name: お客様のお名前
+        b_email: お客様のメールアドレス
+        stage: 公演
+        type: チケット種別
+        comment: ひとこと
 
   access_denined: 許可されていない操作が実行されました。
