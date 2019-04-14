@@ -62,12 +62,18 @@ index do
     end
     f.actions
   end
-  
-  show :title => 'チケット' do  
-  attributes_table do
-      row :user_id, as: :select, collection: User.pluck(:name, :id).to_h
-      row :stage_id, as: :select, collection: Stage.pluck(:performance, :id).to_h
-      row :type_id, as: :select, collection: Type.pluck(:kind, :id).to_h
+
+  show :title => 'チケット' do
+    attributes_table do
+      row :user_id do |t|
+        t.user.name
+      end
+      row :stage_id do |t|
+        t.stage.performance
+      end
+      row :type_id do |t|
+        t.type.kind
+      end
       row :count
       row :b_name
       row :b_mail
