@@ -22,7 +22,7 @@ class RegistersController < ApplicationController
   def to_confirm
     @register = Register.find(params[:register][:register_id])
     if @register.generate_ticket
-      render action: :thankyou
+      redirect_to thankyou_user_path(@register.user.id) and return
     end
   end
 
