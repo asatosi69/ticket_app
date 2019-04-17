@@ -12,14 +12,6 @@
   <body>
     <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
       <div class="container-fluid">
-        <% if user_signed_in? %>
-          ログインユーザー： <%= current_user.email %>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-        <% else %>
-          <%= link_to "TOP画面", root_path %>
-          <%= link_to "新規作成", new_user_registration_path %>
-          <%= link_to "ログイン", new_user_session_path %>
-        <% end %>
       </div>
     </nav>
     <p class="notice"><%= notice %></p>
