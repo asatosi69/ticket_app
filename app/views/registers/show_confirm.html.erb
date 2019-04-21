@@ -40,5 +40,6 @@
 
   <div class="actions">
     <%= form.submit '確認' %>
+    <%= link_to '修正', edit_register_user_path(@register.user_id, @register.id) %>
   </div>
 <% end %>

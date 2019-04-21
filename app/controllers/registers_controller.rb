@@ -5,6 +5,10 @@ class RegistersController < ApplicationController
     @register = Register.new(user_id: params[:id])
   end
 
+  def edit
+    @register = Register.find(params[:register_id])
+  end
+
   def confirm
     @register = Register.new(register_params)
     @register.user_id = params[:id]
