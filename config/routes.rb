@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       get :register, to: 'registers#new'
       post :register_confirm, to: 'registers#confirm'
       get 'show_confirm/:register_id', to: 'registers#show_confirm', as: :show_confirm
+      get 'edit/:register_id', to: 'registers#edit', as: :edit_register
       patch :register_to_confirm, to: 'registers#to_confirm'
       get :thankyou, to: 'registers#thankyou'
     end
