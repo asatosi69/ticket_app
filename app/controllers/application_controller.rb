@@ -7,6 +7,11 @@ class ApplicationController < ActionController::Base
     redirect_to admin_tickets_path, alert: I18n.t('access_denined')
   end
 
+  def after_sign_in_path_for(resource)
+    # NOTE: 現状ログイン機能はadminサイトのみのため、ログイン後は決め打ちでdashboardへ飛ばす
+    admin_root_path
+  end
+
   protected
 
     def configure_permitted_parameters
