@@ -10,7 +10,7 @@ class RegistersController < ApplicationController
     @register = Register.find(params[:register_id])
   end
 
-  def confirm
+  def create
     @register = Register.new(register_params)
     @register.user_id = params[:id]
     if @register.save

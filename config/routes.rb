@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :users, only: [] do
     member do
       get :register, to: 'registers#new'
-      post :register_confirm, to: 'registers#confirm'
+      post :register_confirm, to: 'registers#create'
       patch :register_confirm, to: 'registers#update'
       get 'show_confirm/:register_id', to: 'registers#show_confirm', as: :show_confirm
       get 'edit/:register_id', to: 'registers#edit', as: :edit_register
