@@ -7,7 +7,7 @@ class RegistersController < ApplicationController
   end
 
   def edit
-    @register = Register.find(params[:register_id])
+    @register = Register.init.find(params[:register_id]) # NOTE: 修正可能なのは、initの状態のもののみ
   end
 
   def create
