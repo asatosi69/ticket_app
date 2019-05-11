@@ -45,7 +45,10 @@ class RegistersController < ApplicationController
   private
 
   def set_register
-    @register = Register.find_by(id: params[:register][:id], user_id: params[:register][:user_id])
+    @register = Register.find_by(
+      id: params[:register][:id],
+      user_id: params[:register][:user_id]
+    )
   end
 
   def register_params
