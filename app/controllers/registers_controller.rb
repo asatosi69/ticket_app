@@ -13,10 +13,10 @@ class RegistersController < ApplicationController
   def confirm
     @register = Register.new(register_params)
     @register.user_id = params[:id]
-    unless @register.save
-      render action: :new
-    else
+    if @register.save
       redirect_to show_confirm_user_path(id: @register.user_id, register_id: @register.id)
+    else
+      render action: :new
     end
   end
 
