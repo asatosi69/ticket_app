@@ -1,4 +1,5 @@
 class RegistersController < ApplicationController
+  before_action :set_register, only: %i(update)
 
   def new
     return redirect_to 'https://google.co.jp' if User.where(id: params[:id]).blank?
@@ -6,16 +7,24 @@ class RegistersController < ApplicationController
   end
 
   def edit
-    @register = Register.find(params[:register_id])
+    @register = Register.init.find(params[:register_id]) # NOTE: 修正可能なのは、initの状態のもののみ
   end
 
-  def confirm
+  def create
     @register = Register.new(register_params)
     @register.user_id = params[:id]
-    unless @register.save
-      render action: :new
-    else
+    if @register.save
       redirect_to show_confirm_user_path(id: @register.user_id, register_id: @register.id)
+    else
+      render action: :new
+    end
+  end
+
+  def update
+    if @register.update(register_params)
+      redirect_to show_confirm_user_path(id: @register.user_id, register_id: @register.id)
+    else
+      render action: :new
     end
   end
 
@@ -34,6 +43,13 @@ class RegistersController < ApplicationController
   end
 
   private
+
+  def set_register
+    @register = Register.find_by(
+      id: params[:register][:id],
+      user_id: params[:register][:user_id]
+    )
+  end
 
   def register_params
     params.require(:register).permit(:user_id, :count, :b_name, :b_email, :stage_id, :type_id, :comment, :state, :ticket_id)

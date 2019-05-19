@@ -12,6 +12,7 @@
   <% end %>
 
   <%= form.hidden_field :user_id, id: :register_user_id, value: register.user_id %>
+  <%= form.hidden_field :id, id: :register_id, value: register.id %>
 
   <div class="form-group">
     <%= User.human_attribute_name(:name) %>
@@ -50,6 +51,6 @@
 
   <div class="actions">
     <%= form.submit '申込' %>
-    <%= form.submit 'クリア', type: :reset, class: 'btn btn-light' %>
+    <%= form.submit 'リセット', type: :reset, class: 'btn btn-light' %>
   </div>
 <% end %>
