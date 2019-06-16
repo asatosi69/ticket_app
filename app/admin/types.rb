@@ -53,10 +53,13 @@ end
   controller do
     def destroy
       resource = find_resource
-      return if resource.blank?
-
       resource.destroy
-      flash[:error] = resource.errors.full_messages
+
+      if resource.errors.full_messages.blank?
+        flash[:notice] = '削除しました。'
+      else
+        flash[:error] = resource.errors.full_messages
+      end
       redirect_to action: :index
     end
   end
