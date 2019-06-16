@@ -23,4 +23,15 @@ class User < ApplicationRecord
   has_many :tickets
   
   validates :name, presence: true #この行を追加しました(2019/1/22)
+
+  before_destroy :validate_ticket_presence
+
+  private
+
+  def validate_ticket_presence
+    return true if tickets.blank?
+
+    errors.add :base, '紐づくチケットが残っているため、削除できません'
+    throw(:abort)
+  end
 end
