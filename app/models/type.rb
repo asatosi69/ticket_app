@@ -24,7 +24,7 @@ class Type < ApplicationRecord
   def validate_ticket_presence
     return true if tickets.blank?
 
-    errors.add :base, '紐づくチケットが残っているため、削除できません'
+    errors.add :base, 'このレコードを用いてチケットの申込が実施されています。削除する場合は申込済のチケットの情報を変更してください。'
     throw(:abort)
   end
 end
