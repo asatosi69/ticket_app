@@ -23,7 +23,9 @@ class Stage < ApplicationRecord
   private
 
   def validate_ticket_presence
+    return true if tickets.blank?
+
     errors.add :base, '紐づくチケットが残っているため、削除できません'
-    throw(:abort) if tickets.blank?
+    throw(:abort)
   end
 end
