@@ -50,4 +50,14 @@ show title: :kind do
     end
 end
 
+  controller do
+    def destroy
+      resource = find_resource
+      return if resource.blank?
+
+      resource.destroy
+      flash[:error] = resource.errors.full_messages
+      redirect_to action: :index
+    end
+  end
 end
