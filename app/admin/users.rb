@@ -25,4 +25,17 @@ ActiveAdmin.register User do
     f.actions
   end
 
+  controller do
+    def destroy
+      resource = find_resource
+      resource.destroy
+
+      if resource.errors.full_messages.blank?
+        flash[:notice] = '削除しました。'
+      else
+        flash[:error] = resource.errors.full_messages
+      end
+      redirect_to action: :index
+    end
+  end
 end
