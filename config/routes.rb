@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get 'edit/:register_id', to: 'registers#edit', as: :edit_register
       patch :register_to_confirm, to: 'registers#to_confirm'
       get :thankyou, to: 'registers#thankyou'
+      get :ticket_summary, to: 'ticket_summary#user_summary'
     end
   end
 
