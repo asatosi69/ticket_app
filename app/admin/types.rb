@@ -24,6 +24,7 @@ index do
     column :kind
     column :seat
     column :price #この行をを追加しました(2019/1/22)
+    column :color_code
     actions
   end
 
@@ -37,16 +38,17 @@ form do |f|
       f.input :kind
       f.input :seat
       f.input :price #この行をを追加しました(2019/1/22)
+      f.input :color_code
     end
     f.actions
   end
-  
-  
-show title: :kind do  
+
+show title: :kind do
   attributes_table do
       row :kind
       row :seat
       row :price
+      row :color_code
     end
 end
 

@@ -5,14 +5,14 @@
   <%= types.count %><% types.each do |t| %>(1)<% end %>
 </p>
 <% types.each do |t| %>
-  <div>
+  <div style="color: <%= t.color_code %>;">
     この色は、<%= t.kind %>チケットの販売枚数
   </div>
 <% end %>
 <p>
 この色は、各種類のチケットの合計が何席分の売り上げなのかを示す。
 </p>
-上の例では、<%= types.count %> 席埋まっており、内訳が「<% types.each do |t| %><%= t.kind %>：1 <% end %>」であることをしめす
+上の例では、<%= types.count %> 席埋まっており、内訳が「<% types.each do |t| %><span style="color: <%= t.color_code %>"><%= t.kind %>：1 </span><% end %>」であることをしめす
 <table class='index_table' id='summary_table'>
   <th></th>
   <% Stage.all.each do |stage| %>
