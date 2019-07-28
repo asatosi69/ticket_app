@@ -2,7 +2,7 @@
 チケット枚数の見方（凡例）
 <p>
   <% types = Type.all %>
-  <%= types.count %><% types.each do |t| %>(1)<% end %>
+  <%= types.count %><% types.each do |t| %><span style="color: <%= t.color_code %>;">(1)</span><% end %>
 </p>
 <% types.each do |t| %>
   <div style="color: <%= t.color_code %>;">
@@ -10,7 +10,7 @@
   </div>
 <% end %>
 <p>
-この色は、各種類のチケットの合計が何席分の売り上げなのかを示す。
+黒色は、各種類のチケットの合計が何席分の売り上げなのかを示す。
 </p>
 上の例では、<%= types.count %> 席埋まっており、内訳が「<% types.each do |t| %><span style="color: <%= t.color_code %>"><%= t.kind %>：1 </span><% end %>」であることをしめす
 <table class='index_table' id='summary_table'>
