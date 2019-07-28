@@ -37,7 +37,12 @@
       $("#summary_table").append($("<tr id='" + row_id + "'></tr>"));
       $('#' + row_id).append($("<td></td>").text(data.user_name));
       data.counts_by_stage.forEach( (val) => {
-        $('#' + row_id).append($("<td></td>").text(val.total_seats_count));
+        var content = val.total_seats_count;
+        val.counts_by_type.forEach( (count_by_type) => {
+          content += '<span style="color: ' + count_by_type.color_code + '";>(' + count_by_type.count + ')</span>'
+        });
+
+        $('#' + row_id).append($("<td></td>").html(content));
       });
       $('#' + row_id).append($("<td></td>").text(data.total_counts.summary_total_seats));
     });

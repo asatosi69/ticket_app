@@ -12,11 +12,7 @@ ActiveAdmin.register Type do
 #   permitted
 # end
 
-
-  
-
 permit_params :kind, :seat, :price
-
 
 index do
     selectable_column
@@ -31,7 +27,6 @@ index do
   filter :kind
   filter :seat
   filter :price #この行をを追加しました(2019/1/22)
-
 
 form do |f|
     f.inputs do

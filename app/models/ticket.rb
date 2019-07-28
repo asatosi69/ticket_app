@@ -22,7 +22,7 @@ class Ticket < ApplicationRecord
   accepts_nested_attributes_for :stage
   belongs_to :type
   accepts_nested_attributes_for :type
-  
+
   validates :user_id, presence: true #この行を追加しました(2019/1/22)
   validates :stage_id, presence: true #この行を追加しました(2019/1/22)
   validates :type_id, presence: true #この行を追加しました(2019/1/22)
@@ -64,6 +64,7 @@ class Ticket < ApplicationRecord
       counts_by_type << {
         type_id: t.id,
         type_name: t.kind,
+        color_code: t.color_code,
         count: tickets.where(type_id: t.id).count
       }
     end
