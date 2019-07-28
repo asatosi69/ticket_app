@@ -29,6 +29,14 @@ class Ticket < ApplicationRecord
   validates :count, numericality: { greater_than_or_equal_to: 0 } #この行を追加しました(2019/1/22)
   validates :b_name, presence: true #この行を追加しました(2019/1/22)
 
+  def self.calc_summary_for_all
+    summary = []
+    User.all.each do |u|
+      summary << calc_summary_for_user(u)
+    end
+    summary
+  end
+
   def self.calc_summary_for_user(user)
     summary = {}
     summary[:user_id] = user.id
