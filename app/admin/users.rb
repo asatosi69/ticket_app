@@ -38,4 +38,8 @@ ActiveAdmin.register User do
       redirect_to action: :index
     end
   end
+  collection_action :show_ticket_summary, method: :get do
+    @page_title = "『#{current_user.name}』チケット集計データ"
+    render '_show_ticket_summary'
+  end
 end

@@ -1,0 +1,45 @@
+<div id='js-current_user_id' data-current_user_id='<%= current_user.id %>'></div>
+チケット枚数の見方（凡例）
+<p>
+  <% types = Type.all %>
+  <%= types.count %><% types.each do |t| %>(1)<% end %>
+</p>
+<% types.each do |t| %>
+  <div>
+    この色は、<%= t.kind %>チケットの販売枚数
+  </div>
+<% end %>
+<p>
+この色は、各種類のチケットの合計が何席分の売り上げなのかを示す。
+</p>
+上の例では、<%= types.count %> 席埋まっており、内訳が「<% types.each do |t| %><%= t.kind %>：1 <% end %>」であることをしめす
+<table class='index_table' id='summary_table'>
+  <th></th>
+  <% Stage.all.each do |stage| %>
+    <th><%= stage.performance %></th>
+  <% end %>
+  <th>集計</th>
+</table>
+<script>
+  var current_user_id = $('#js-current_user_id').data('current_user_id');
+  $.ajax({
+    url:' /users/' + current_user_id + '/ticket_summary.json',
+    type: 'GET',
+    data:{
+    }
+  })
+  // Ajaxリクエストが成功した時発動
+  .done( (datas) => {
+    // $('.result').html(data);
+    console.log(datas);
+    datas.forEach( (data) => {
+      var row_id = 'table_row_' + data.user_id
+      $("#summary_table").append($("<tr id='" + row_id + "'></tr>"));
+      $('#' + row_id).append($("<td></td>").text(data.user_name));
+      data.counts_by_stage.forEach( (val) => {
+        $('#' + row_id).append($("<td></td>").text(val.total_seats_count));
+      });
+      $('#' + row_id).append($("<td></td>").text(data.total_counts.summary_total_seats));
+    });
+  })
+</script>
