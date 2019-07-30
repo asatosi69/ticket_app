@@ -12,7 +12,7 @@ ActiveAdmin.register Type do
 #   permitted
 # end
 
-permit_params :kind, :seat, :price
+permit_params :kind, :seat, :price, :color_id
 
 index do
     selectable_column
@@ -20,7 +20,7 @@ index do
     column :kind
     column :seat
     column :price #この行をを追加しました(2019/1/22)
-    column :color_code
+    column :color_id
     actions
   end
 
@@ -33,7 +33,7 @@ form do |f|
       f.input :kind
       f.input :seat
       f.input :price #この行をを追加しました(2019/1/22)
-      f.input :color_code
+      f.input :color_id, as: :select, collection: Color.pluck(:color_name, :id).to_h #nameを入力必須にしたので、pluck内の『:email』を『:name』に変更しました。(2019/1/22)
     end
     f.actions
   end
@@ -43,7 +43,9 @@ show title: :kind do
       row :kind
       row :seat
       row :price
-      row :color_code
+      row :color_id do |t|
+        t.color.color_name
+      end
     end
 end
 
