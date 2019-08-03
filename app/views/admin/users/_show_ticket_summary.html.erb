@@ -40,7 +40,7 @@
       data.counts_by_stage.forEach( (val) => {
         var content = val.total_seats_count;
         val.counts_by_type.forEach( (count_by_type) => {
-          content += '<span style="color: ' + count_by_type.color.color_code + '";>(' + count_by_type.count + ')</span>'
+          content += '<span style="color: ' + count_by_type.color_code + '";>(' + count_by_type.count + ')</span>'
         });
 
         $('#' + row_id).append($("<td></td>").html(content));
