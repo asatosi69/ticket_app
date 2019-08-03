@@ -72,7 +72,7 @@ class Ticket < ApplicationRecord
       counts_by_type << {
         type_id: t.id,
         type_name: t.kind,
-        color_code: t.color_code,
+        color_code: t.color.color_code,
         count: tickets.where(type_id: t.id).count
       }
     end
