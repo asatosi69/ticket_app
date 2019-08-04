@@ -1,19 +1,19 @@
 <div id='js-current_user_id' data-current_user_id='<%= current_user.id %>'></div>
 チケット枚数の見方（凡例）
 <p>
-  <% types = Type.all %>
+  <% types = Type.all.includes(:color) %>
   <% sample_sum_of_seat = Type.sum(:seat) %>
-  <%= sample_sum_of_seat %><% types.each do |t| %><span style="color: <%= t.color_code %>;">(1)</span><% end %>
+  <%= sample_sum_of_seat %><% types.each do |t| %><span style="color: <%= t.color.color_code %>;">(1)</span><% end %>
 </p>
 <% types.each do |t| %>
-  <div style="color: <%= t.color_code %>;">
+  <div style="color: <%= t.color.color_code%>;">
     この色は、<%= t.kind %>チケットの販売枚数を表します。1枚の<%= t.kind %>チケットは、席を<%= t.seat %>席分、消費します。
   </div>
 <% end %>
 <p>
 黒色は、各種類のチケットの合計が何席分の売り上げなのかを示す。
 </p>
-上の例では、<%= sample_sum_of_seat %> 席埋まっており、内訳が「<% types.each do |t| %><span style="color: <%= t.color_code %>"><%= t.kind %>：1 </span><% end %>」であることをしめす
+上の例では、<%= sample_sum_of_seat %> 席埋まっており、内訳が「<% types.each do |t| %><span style="color: <%= t.color.color_code %>"><%= t.kind %>：1 </span><% end %>」であることをしめす
 <table class='index_table' id='summary_table'>
   <th></th>
   <% Stage.all.each do |stage| %>
