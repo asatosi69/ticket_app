@@ -21,6 +21,9 @@ index do
     column :seat
     column :price #この行をを追加しました(2019/1/22)
     column :color_id
+    column Type.human_attribute_name(:color) do |t|
+      t.color.color_code
+    end
     actions
   end
 
