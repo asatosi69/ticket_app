@@ -22,7 +22,7 @@ index do
     column :price #この行をを追加しました(2019/1/22)
     column :color_id
     column Type.human_attribute_name(:color) do |t|
-      t.color.color_code
+      "<span style= 'color: #{t.color.color_code}'>#{t.color.color_code}</span>".html_safe
     end
     actions
   end
