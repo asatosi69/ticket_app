@@ -44,7 +44,7 @@ class Ticket < ApplicationRecord
     counts_by_stage = []
     summary_total_seats = 0
     summary_counts_by_type = {}
-    Stage.all.each do |s|
+    Stage.performance_order.each do |s|
       count_by_stage = calc_summary_for_stage_and_user(stage: s, user: user)
       counts_by_stage << count_by_stage
       count_by_stage[:counts_by_type].each do |v|

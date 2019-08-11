@@ -20,6 +20,8 @@ class Stage < ApplicationRecord
 
   before_destroy :validate_ticket_presence
 
+  scope :performance_order, -> { order(performance: :asc) }
+
   private
 
   def validate_ticket_presence
