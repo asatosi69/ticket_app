@@ -20,6 +20,19 @@
     <th><%= stage.performance %></th>
   <% end %>
   <th>集計</th>
+  <tr id="summary_line">
+    <th>座席</th>
+      <% @stages.each do |stage| %>
+        <td><%= stage.total %></td>
+      <% end %>
+      <td><%= @stages.pluck(:total).sum %></td>
+  </tr>
+  <tr>
+    <th>販売済</th>
+  </tr>
+  <tr>
+    <th>充足率</th>
+  </tr>
 </table>
 <script>
   var current_user_id = $('#js-current_user_id').data('current_user_id');
@@ -35,7 +48,7 @@
     console.log(datas);
     datas.forEach( (data) => {
       var row_id = 'table_row_' + data.user_id
-      $("#summary_table").append($("<tr id='" + row_id + "'></tr>"));
+      $("#summary_line").before($("<tr id='" + row_id + "'></tr>"));
       $('#' + row_id).append($("<td></td>").text(data.user_name));
       data.counts_by_stage.forEach( (val) => {
         var content = val.total_seats_count;
