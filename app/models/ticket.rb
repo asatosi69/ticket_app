@@ -53,6 +53,7 @@ class Ticket < ApplicationRecord
           count: 0
         }
         summary_counts_by_type[:"#{v[:type_id]}"][:count] += v[:count]
+        summary_counts_by_type[:"#{v[:type_id]}"][:color_code] ||= v[:color_code]
       end
       summary_total_seats += count_by_stage[:total_seats_count]
 

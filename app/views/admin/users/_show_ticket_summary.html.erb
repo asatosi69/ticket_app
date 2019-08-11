@@ -67,7 +67,14 @@
 
         $('#' + row_id).append($("<td></td>").html(content));
       });
-      $('#' + row_id).append($("<td></td>").text(data.total_counts.summary_total_seats));
+      var summary_count_by_type_html = ''
+      for (var summary_count_by_type in data.summary_counts_by_type) {
+        item = data.summary_counts_by_type[summary_count_by_type];
+        summary_count_by_type_html += '<span style="color: ' + item.color_code  + ';">(' + item.count  + ')</span>';
+      }
+      $('#' + row_id).append($("<td></td>").html(
+        data.total_counts.summary_total_seats + summary_count_by_type_html
+      ));
     });
   })
 </script>
