@@ -76,7 +76,9 @@ class Ticket < ApplicationRecord
         count: tickets.where(type_id: t.id).count
       }
     end
-    total_seats_count = tickets.sum(:count)
+    total_seats_count = tickets.inject(0) do |sum, ticket|
+      sum + ticket.type.seat
+    end
     {
       stage_id: stage.id,
       stage_performance: stage.performance,

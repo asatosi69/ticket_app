@@ -16,7 +16,7 @@
 上の例では、<%= sample_sum_of_seat %> 席埋まっており、内訳が「<% types.each do |t| %><span style="color: <%= t.color.color_code %>"><%= t.kind %>：1 </span><% end %>」であることをしめす
 <table class='index_table' id='summary_table'>
   <th></th>
-  <% Stage.all.each do |stage| %>
+  <% Stage.performance_order.each do |stage| %>
     <th><%= stage.performance %></th>
   <% end %>
   <th>集計</th>
@@ -25,13 +25,22 @@
       <% @stages.each do |stage| %>
         <td><%= stage.total %></td>
       <% end %>
-      <td><%= @stages.pluck(:total).sum %></td>
+      <td><%= @sum_of_stage_total%></td>
   </tr>
   <tr>
     <th>販売済</th>
+    <% total = 0 %>
+    <% @stage_ticket_seats.each do |ticket_seats| %>
+      <td><%= ticket_seats %></td>
+    <% end %>
+    <td><%= @sum_of_stage_ticket_seats %></td>
   </tr>
   <tr>
     <th>充足率</th>
+    <% @adequacy_ratios.each do |ratio| %>
+      <td><%= ratio.to_i %></td>
+    <% end %>
+    <td><%= ((@sum_of_stage_ticket_seats.to_f / @sum_of_stage_total.to_f) * 100).to_i %></td>
   </tr>
 </table>
 <script>

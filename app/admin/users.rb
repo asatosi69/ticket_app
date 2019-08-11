@@ -41,6 +41,17 @@ ActiveAdmin.register User do
   collection_action :show_ticket_summary, method: :get do
     @page_title = "『#{current_user.name}』チケット集計データ"
     @stages = Stage.performance_order
+    @ticket_summary_for_all = Ticket.calc_summary_for_all
+    @sum_of_stage_total = @stages.pluck(:total).sum
+    @stage_ticket_seats = []
+    @stages.each do |stage|
+      @stage_ticket_seats << stage.tickets.inject(0) { |sum, ticket| sum += ticket.type.seat }
+    end
+    @sum_of_stage_ticket_seats = @stage_ticket_seats.inject(:+)
+    @adequacy_ratios = []
+    @stages.each_with_index do |stage, idx|
+      @adequacy_ratios << (@stage_ticket_seats[idx].to_f / stage.total.to_f) * 100
+    end
     render '_show_ticket_summary'
   end
 end
