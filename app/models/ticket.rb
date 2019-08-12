@@ -29,6 +29,10 @@ class Ticket < ApplicationRecord
   validates :count, numericality: { greater_than_or_equal_to: 0 } #この行を追加しました(2019/1/22)
   validates :b_name, presence: true #この行を追加しました(2019/1/22)
 
+  def self.sumup_all_ticket_price
+    joins(:type).pluck(:price).sum
+  end
+
   def self.calc_summary_for_all
     summary = []
     User.all.each do |u|

@@ -22,6 +22,10 @@ class Stage < ApplicationRecord
 
   scope :performance_order, -> { order(performance: :asc) }
 
+  def sumup_ticket_price
+    tickets.joins(:type).pluck(:price).sum
+  end
+
   private
 
   def validate_ticket_presence

@@ -20,7 +20,15 @@
     <th><%= stage.performance %></th>
   <% end %>
   <th>集計</th>
-  <tr id="summary_line">
+  <tr id="summary_line"></tr>
+  </tr>
+    <th>金額</th>
+    <% Stage.performance_order.each do |stage| %>
+      <td><%= stage.sumup_ticket_price %></td>
+    <% end %>
+    <td><%= Ticket.sumup_all_ticket_price %></td>
+  </tr>
+  <tr>
     <th>座席</th>
       <% @stages.each do |stage| %>
         <td><%= stage.total %></td>
