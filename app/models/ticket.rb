@@ -29,6 +29,10 @@ class Ticket < ApplicationRecord
   validates :count, numericality: { greater_than_or_equal_to: 0 } #この行を追加しました(2019/1/22)
   validates :b_name, presence: true #この行を追加しました(2019/1/22)
 
+  def self.sumup_all_ticket_price
+    joins(:type).pluck(:price).sum
+  end
+
   def self.calc_summary_for_all
     summary = []
     User.all.each do |u|
@@ -44,7 +48,7 @@ class Ticket < ApplicationRecord
     counts_by_stage = []
     summary_total_seats = 0
     summary_counts_by_type = {}
-    Stage.all.each do |s|
+    Stage.performance_order.each do |s|
       count_by_stage = calc_summary_for_stage_and_user(stage: s, user: user)
       counts_by_stage << count_by_stage
       count_by_stage[:counts_by_type].each do |v|
@@ -53,6 +57,7 @@ class Ticket < ApplicationRecord
           count: 0
         }
         summary_counts_by_type[:"#{v[:type_id]}"][:count] += v[:count]
+        summary_counts_by_type[:"#{v[:type_id]}"][:color_code] ||= v[:color_code]
       end
       summary_total_seats += count_by_stage[:total_seats_count]
 
@@ -76,7 +81,9 @@ class Ticket < ApplicationRecord
         count: tickets.where(type_id: t.id).count
       }
     end
-    total_seats_count = tickets.sum(:count)
+    total_seats_count = tickets.inject(0) do |sum, ticket|
+      sum + ticket.type.seat
+    end
     {
       stage_id: stage.id,
       stage_performance: stage.performance,
