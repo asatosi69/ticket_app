@@ -14,4 +14,12 @@ class UserMailer < ApplicationMailer
       subject: 'チケットが登録されました。'
     )
   end
+
+  def notice_mail_for_update_ticket(ticket)
+    @ticket = ticket
+    mail(
+      to: @ticket.user.email,
+      subject: 'チケットが更新されました。'
+    )
+  end
 end

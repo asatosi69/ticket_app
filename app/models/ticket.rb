@@ -30,6 +30,7 @@ class Ticket < ApplicationRecord
   validates :b_name, presence: true #この行を追加しました(2019/1/22)
 
   after_create :notice_mail_for_create_ticket
+  after_update :notice_mail_for_update_ticket
 
   def self.sumup_all_ticket_price
     joins(:type).pluck(:price).sum
@@ -99,5 +100,9 @@ class Ticket < ApplicationRecord
 
   def notice_mail_for_create_ticket
     UserMailer.notice_mail_for_create_ticket(self).deliver_now
+  end
+
+  def notice_mail_for_update_ticket
+    UserMailer.notice_mail_for_update_ticket(self).deliver_now
   end
 end
