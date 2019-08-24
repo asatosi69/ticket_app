@@ -78,7 +78,7 @@ class Ticket < ApplicationRecord
         type_id: t.id,
         type_name: t.kind,
         color_code: t.color.color_code,
-        count: tickets.where(type_id: t.id).count
+        count: tickets.where(type_id: t.id).pluck(:count).sum
       }
     end
     total_seats_count = tickets.inject(0) do |sum, ticket|
