@@ -22,4 +22,12 @@ class UserMailer < ApplicationMailer
       subject: 'チケットが更新されました。'
     )
   end
+
+  def notice_mail_for_destroy_ticket(ticket)
+    @ticket = ticket
+    mail(
+      to: @ticket.user.email,
+      subject: 'チケットが削除されました。'
+    )
+  end
 end
