@@ -29,6 +29,8 @@ class Ticket < ApplicationRecord
   validates :count, numericality: { greater_than_or_equal_to: 0 } #この行を追加しました(2019/1/22)
   validates :b_name, presence: true #この行を追加しました(2019/1/22)
 
+  after_create :notice_mail_for_create_ticket
+
   def self.sumup_all_ticket_price
     joins(:type).pluck(:price).sum
   end
@@ -92,4 +94,10 @@ class Ticket < ApplicationRecord
     }
   end
   private_class_method :calc_summary_for_stage_and_user
+
+  private
+
+  def notice_mail_for_create_ticket
+    UserMailer.notice_mail_for_create_ticket(self).deliver_now
+  end
 end
