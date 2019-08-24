@@ -14,6 +14,7 @@ class Register < ApplicationRecord
       comment: comment
     )
     self.ticket = ticket
-    self.confirmed!
+    confirmed!
+    UserMailer.ticket_issued(ticket).deliver_now
   end
 end
