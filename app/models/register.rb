@@ -14,6 +14,6 @@ class Register < ApplicationRecord
       comment: comment
     )
     self.ticket = ticket
-    self.confirmed!
+    confirmed!
   end
 end
