@@ -23,7 +23,7 @@ class Stage < ApplicationRecord
   scope :performance_order, -> { order(performance: :asc) }
 
   def sumup_ticket_price
-    tickets.joins(:type).pluck(:price).sum
+    tickets.joins(:type).pluck(:count, :price).map { |count, price| count * price }.sum
   end
 
   private
