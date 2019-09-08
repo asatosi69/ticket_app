@@ -34,7 +34,7 @@ class Ticket < ApplicationRecord
   after_destroy :notice_mail_for_destroy_ticket
 
   def self.sumup_all_ticket_price
-    joins(:type).pluck(:price).sum
+    joins(:type).pluck(:count, :price).map { |count, price| count * price }.sum
   end
 
   def self.calc_summary_for_all
