@@ -5,14 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+#   coding: utf-8
 
-Color.create!(color_code: '#FF0000', color_name: 'red')
-Color.create!(color_code: '#00FF00', color_name: 'green')
-Color.create!(color_code: '#0000FF', color_name: 'blue')
-
-User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password', name: '0') if Rails.env.development?
-User.create!(email: 'puente.japan@gmail.com', password: 'orangeseed69', password_confirmation: 'orangeseed69', name: '1') if Rails.env.development?
-User.create!(email: 'puente.japan2@gmail.com', password: 'orangeseed69', password_confirmation: 'orangeseed69', name: '2') if Rails.env.development?
-User.create!(email: 'puente.japan3@gmail.com', password: 'orangeseed69', password_confirmation: 'orangeseed69', name: '3') if Rails.env.development?
-User.create!(email: 'puente.japan4@gmail.com', password: 'orangeseed69', password_confirmation: 'orangeseed69', name: '4') if Rails.env.development?
-User.create!(email: 'puente.japan5@gmail.com', password: 'orangeseed69', password_confirmation: 'orangeseed69', name: '5') if Rails.env.development?
+Color.create!(color_code: '#FF0000', color_name: '赤')
+Color.create!(color_code: '#00FF00', color_name: '黄緑')
+Color.create!(color_code: '#0000FF', color_name: '青')
+Color.create!(color_code: '#FFFF00', color_name: '黄')
+Color.create!(color_code: '#00FFFF', color_name: '水色')
+Color.create!(color_code: '#FF00FF', color_name: 'ピンク')
+Color.create!(color_code: '#008000', color_name: '緑')
+Color.create!(color_code: '#000080', color_name: '群青')
+Color.create!(color_code: '#808000', color_name: 'オリーブ')
+Color.create!(color_code: '#800080', color_name: '紫')
+Color.create!(color_code: '#800000', color_name: '栗色')
