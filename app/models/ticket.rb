@@ -86,7 +86,7 @@ class Ticket < ApplicationRecord
       }
     end
     total_seats_count = tickets.inject(0) do |sum, ticket|
-      sum + ticket.type.seat
+      sum + ticket.type.seat * ticket.count
     end
     {
       stage_id: stage.id,
