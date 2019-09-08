@@ -4,7 +4,7 @@ class UserMailer < ApplicationMailer
     @ticket = ticket
     mail(
       to: @ticket.b_mail,
-      subject: 'チケットのお申し込みありがとうございました。'
+      subject: "'#{Rails.application.config.troupe_name}『#{Rails.application.config.performance_name}』のご予約を承りました'"
     )
   end
 
@@ -13,7 +13,7 @@ class UserMailer < ApplicationMailer
     @ticket = ticket
     mail(
       to: @ticket.b_mail,
-      subject: 'チケットが登録されました。'
+      subject: "'#{Rails.application.config.troupe_name}『#{Rails.application.config.performance_name}』のご予約を承りました'"
     )
   end
 
@@ -22,7 +22,7 @@ class UserMailer < ApplicationMailer
     @ticket = ticket
     mail(
       to: @ticket.b_mail,
-      subject: 'チケットが更新されました。'
+      subject: "'#{Rails.application.config.troupe_name}『#{Rails.application.config.performance_name}』のご予約内容を変更いたしました'"
     )
   end
 
@@ -31,7 +31,7 @@ class UserMailer < ApplicationMailer
     @ticket = ticket
     mail(
       to: @ticket.b_mail,
-      subject: 'チケットが削除されました。'
+     subject: "'#{Rails.application.config.troupe_name}『#{Rails.application.config.performance_name}』のご予約をキャンセルいたしました。'"
     )
   end
 end

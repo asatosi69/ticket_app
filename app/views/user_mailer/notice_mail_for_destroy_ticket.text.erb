@@ -1,28 +1,22 @@
-団体名：<%= Rails.application.config.troupe_name %>
-公演名：<%= Rails.application.config.performance_name %>
-公演URL：<%= Rails.application.config.performance_url %>
-団体URL：<%= Rails.application.config.troupe_url %>
-
-
-[<%= Rails.application.config.troupe_name %>] 『[公演名：<%= Rails.application.config.performance_name %>]』のチケットをご予約いただき、誠にありがとうございます！
+<%= Rails.application.config.troupe_name %> 『公演名：<%= Rails.application.config.performance_name %>』のチケットをご予約いただき、誠にありがとうございます！
 残念ながらキャンセルをご希望とのことですので、下記の予約を解除させていただきました。
 
 =====================================================
-お名前：[<%= @ticket.b_name %>]様
-メールアドレス：[<%= @ticket.b_mail %>]
+お名前：<%= @ticket.b_name %>様
+メールアドレス：<%= @ticket.b_mail %>
 =====================================================
 ご予約内容：
-[<%= Rails.application.config.troupe_name %>] 『[公演名：<%= Rails.application.config.performance_name %>]』
-[<%= @ticket.stage_performance %>]開演
-[<%= @ticket.type_kind %>] [<%= @ticket.type.price %>]円 × [<%= @ticket.count %>]枚
-お支払い金額：[<%= @ticket.type.price * @ticket.count %>]円
+<%= Rails.application.config.troupe_name %> 『公演名：<%= Rails.application.config.performance_name %>』
+<%= @ticket.stage.performance %>開演
+<%= @ticket.type.kind %> <%= @ticket.type.price %>円 × <%= @ticket.count %>枚
+お支払い金額：<%= @ticket.type.price * @ticket.count %>円
 ---------------------
 またのご予約をお待ちしております。
-今後とも[団体名]をよろしくお願いいたします。
+今後とも団体名をよろしくお願いいたします。
 
 ★公演情報
-[<%= Rails.application.config.troupe_name %>] 『[公演名：<%= Rails.application.config.performance_name %>]』
-公演ページ： [<%= Rails.application.config.performance_url %>]
+<%= Rails.application.config.troupe_name %> 『<%= Rails.application.config.performance_name %>』
+公演ページ： <%= Rails.application.config.performance_url %>
 
-[<%= Rails.application.config.troupe_name %>]
-[<%= Rails.application.config.troupe_url %>]
+<%= Rails.application.config.troupe_name %>
+<%= Rails.application.config.troupe_url %>
