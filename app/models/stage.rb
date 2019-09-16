@@ -35,6 +35,23 @@ class Stage < ApplicationRecord
     tickets.inject(0) { |sum, ticket| sum += ticket.type.seat * ticket.count}
   end
 
+  def end_flag
+    return true if self[:end_flag]
+    calc_end_flag!
+  end
+  alias end_flag? end_flag
+
+  def calc_end_flag!
+    return if self[:end_flag]
+
+    if deadline.past? || calc_adequacy_ratio >= 100
+      update_attribute(:end_flag, true)
+      true
+    else
+      false
+    end
+  end
+
   private
 
   def validate_ticket_presence
