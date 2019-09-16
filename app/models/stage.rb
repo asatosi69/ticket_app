@@ -21,6 +21,7 @@ class Stage < ApplicationRecord
   before_destroy :validate_ticket_presence
 
   scope :performance_order, -> { order(performance: :asc) }
+  scope :within_deadline, -> { where('deadline > ?', ::Time.current) }
 
   def calc_adequacy_ratio
     (sumup_ticket_seat.to_f / total.to_f) * 100
