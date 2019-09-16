@@ -22,6 +22,10 @@ class Stage < ApplicationRecord
 
   scope :performance_order, -> { order(performance: :asc) }
 
+  def calc_adequacy_ratio
+    (sumup_ticket_seat.to_f / total.to_f) * 100
+  end
+
   def sumup_ticket_price
     tickets.joins(:type).pluck(:count, :price).map { |count, price| count * price }.sum
   end

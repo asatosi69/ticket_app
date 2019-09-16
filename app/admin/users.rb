@@ -48,10 +48,6 @@ ActiveAdmin.register User do
       @stage_ticket_seats << stage.sumup_ticket_seat
     end
     @sum_of_stage_ticket_seats = @stage_ticket_seats.inject(:+)
-    @adequacy_ratios = []
-    @stages.each_with_index do |stage, idx|
-      @adequacy_ratios << (@stage_ticket_seats[idx].to_f / stage.total.to_f) * 100
-    end
     render '_show_ticket_summary'
   end
 end

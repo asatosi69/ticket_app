@@ -45,8 +45,8 @@
   </tr>
   <tr>
     <th>充足率</th>
-    <% @adequacy_ratios.each do |ratio| %>
-      <td><%= ratio.to_i %></td>
+    <% @stages.each do |stage| %>
+      <td><%= stage.calc_adequacy_ratio.to_i %></td>
     <% end %>
     <td><%= ((@sum_of_stage_ticket_seats.to_f / @sum_of_stage_total.to_f) * 100).to_i %></td>
   </tr>
