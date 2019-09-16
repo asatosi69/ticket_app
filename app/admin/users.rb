@@ -45,7 +45,7 @@ ActiveAdmin.register User do
     @sum_of_stage_total = @stages.pluck(:total).sum
     @stage_ticket_seats = []
     @stages.each do |stage|
-      @stage_ticket_seats << stage.tickets.inject(0) { |sum, ticket| sum += ticket.type.seat * ticket.count}
+      @stage_ticket_seats << stage.sumup_ticket_seat
     end
     @sum_of_stage_ticket_seats = @stage_ticket_seats.inject(:+)
     @adequacy_ratios = []

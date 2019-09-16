@@ -26,6 +26,10 @@ class Stage < ApplicationRecord
     tickets.joins(:type).pluck(:count, :price).map { |count, price| count * price }.sum
   end
 
+  def sumup_ticket_seat
+    tickets.inject(0) { |sum, ticket| sum += ticket.type.seat * ticket.count}
+  end
+
   private
 
   def validate_ticket_presence
