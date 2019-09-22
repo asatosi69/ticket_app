@@ -21,7 +21,7 @@
 
   <div class="form-group">
     <%= form.label :stage%>
-    <%= form.select :stage_id, Stage.within_deadline.map { |t| [t.performance, t.id]}, {include_blank: true}, class: 'form-control' %>
+    <%= form.select :stage_id, Stage.within_deadline.on_sale.map { |t| [t.performance, t.id]}, {include_blank: true}, class: 'form-control' %>
   </div>
 
   <div class="form-group">
