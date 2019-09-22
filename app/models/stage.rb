@@ -53,6 +53,20 @@ class Stage < ApplicationRecord
     end
   end
 
+  def end_reason
+    if end_flag?
+      if calc_adequacy_ratio >= 100
+        '受付予定枚数を超えたため、受付を終了しました'
+      elsif deadline.past?
+        '予約受付時間を過ぎたため、受付を終了しました'
+      else
+        '管理者が予約受付を停止致しました'
+      end
+    else
+      '-'
+    end
+  end
+
   private
 
   def validate_ticket_presence

@@ -45,6 +45,9 @@ permit_params :performance, :total, :deadline, :end_flag
       row :total
       row :deadline
       row :end_flag
+      row :end_reason do |s|
+        s.end_reason
+      end
     end
   end
 
