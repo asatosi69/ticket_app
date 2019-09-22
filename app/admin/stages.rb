@@ -38,9 +38,9 @@ permit_params :performance, :total, :deadline, :end_flag
     end
     f.actions
   end
-  
-  show title: :performance do  
-  attributes_table do
+
+  show title: :performance do
+    attributes_table do
       row :performance
       row :total
       row :deadline
