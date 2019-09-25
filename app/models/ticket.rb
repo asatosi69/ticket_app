@@ -32,6 +32,7 @@ class Ticket < ApplicationRecord
   after_create :notice_mail_for_create_ticket
   after_update :notice_mail_for_update_ticket
   after_destroy :notice_mail_for_destroy_ticket
+  after_commit :calc_stage_end_flag
 
   def self.sumup_all_ticket_price
     joins(:type).pluck(:count, :price).map { |count, price| count * price }.sum
@@ -98,6 +99,10 @@ class Ticket < ApplicationRecord
   private_class_method :calc_summary_for_stage_and_user
 
   private
+
+  def calc_stage_end_flag
+    stage.calc_end_flag!
+  end
 
   def notice_mail_for_create_ticket
     UserMailer.notice_mail_for_create_ticket(self).deliver_now

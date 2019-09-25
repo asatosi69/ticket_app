@@ -13,8 +13,8 @@
 =====================================================
 ご予約内容：
 [<%= Rails.application.config.troupe_name %>] 『[公演名：<%= Rails.application.config.performance_name %>]』
-[<%= @ticket.stage_performance %>]開演
-[<%= @ticket.type_kind %>] [<%= @ticket.type.price %>]円 × [<%= @ticket.count %>]枚
+[<%= @ticket.stage.performance %>]開演
+[<%= @ticket.type.kind %>] [<%= @ticket.type.price %>]円 × [<%= @ticket.count %>]枚
 お支払い金額：[<%= @ticket.type.price * @ticket.count %>]円
 ---------------------
 このメール内容は公演当日まで保管いただくようお願いたします。
