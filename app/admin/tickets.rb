@@ -52,7 +52,11 @@ index do
         f.input :user_name, input_html: { value: current_user.name, disabled: true }
         f.input :user_id, input_html: { value: current_user.id }, as: :hidden
       end
-      f.input :stage_id, as: :select, collection: Stage.pluck(:performance, :id).to_h
+      if current_user.admin?
+        f.input :stage_id, as: :select, collection: Stage.pluck(:performance, :id).to_h
+      else
+        f.input :stage_id, as: :select, collection: Stage.on_sale.pluck(:performance, :id).to_h
+      end
       f.input :type_id, as: :select, collection: Type.pluck(:kind, :id).to_h
       f.input :count
       f.input :b_name

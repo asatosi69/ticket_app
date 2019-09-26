@@ -21,9 +21,50 @@ class Stage < ApplicationRecord
   before_destroy :validate_ticket_presence
 
   scope :performance_order, -> { order(performance: :asc) }
+  scope :within_deadline, -> { where('deadline > ?', ::Time.current) }
+  scope :on_sale, -> { within_deadline.where(end_flag: false) }
+
+  def calc_adequacy_ratio
+    (sumup_ticket_seat.to_f / total.to_f) * 100
+  end
 
   def sumup_ticket_price
     tickets.joins(:type).pluck(:count, :price).map { |count, price| count * price }.sum
+  end
+
+  def sumup_ticket_seat
+    tickets.inject(0) { |sum, ticket| sum += ticket.type.seat * ticket.count}
+  end
+
+  def end_flag
+    return true if self[:end_flag]
+    calc_end_flag!
+  end
+  alias end_flag? end_flag
+
+  def calc_end_flag!
+    return if self[:end_flag]
+
+    if deadline.past? || calc_adequacy_ratio >= 100
+      update_attribute(:end_flag, true)
+      true
+    else
+      false
+    end
+  end
+
+  def end_reason
+    if end_flag?
+      if calc_adequacy_ratio >= 100
+        '受付予定枚数を超えたため、受付を終了しました'
+      elsif deadline.past?
+        '予約受付時間を過ぎたため、受付を終了しました'
+      else
+        '管理者が予約受付を停止致しました'
+      end
+    else
+      '-'
+    end
   end
 
   private
