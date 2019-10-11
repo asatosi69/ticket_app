@@ -24,6 +24,10 @@ class Stage < ApplicationRecord
   scope :within_deadline, -> { where('deadline > ?', ::Time.current) }
   scope :on_sale, -> { within_deadline.where(end_flag: false) }
 
+  def remain_count_of_seat
+    total - sumup_ticket_seat
+  end
+
   def calc_adequacy_ratio
     (sumup_ticket_seat.to_f / total.to_f) * 100
   end
