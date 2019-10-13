@@ -67,6 +67,31 @@ index do
     f.actions
   end
 
+  controller do
+    def create
+      @ticket = Ticket.new(permitted_params[:ticket])
+      validation_context = current_user.admin? ? :admin : nil
+
+      if @ticket.save(context: validation_context)
+        redirect_to admin_ticket_path(@ticket)
+      else
+        render :new
+      end
+    end
+
+    def update
+      @ticket = find_resource
+      @ticket.attributes = permitted_params[:ticket]
+      validation_context = current_user.admin? ? :admin : nil
+
+      if @ticket.save(context: validation_context)
+        redirect_to admin_ticket_path(@ticket)
+      else
+        render :edit
+      end
+    end
+  end
+
   show :title => 'チケット' do
     attributes_table do
       row :user_id do |t|
