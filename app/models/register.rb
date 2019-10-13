@@ -26,6 +26,7 @@ class Register < ApplicationRecord
 
   def not_over_remain_count_of_seat
     return if stage.remain_count_of_seat >= type.seat * count
+
     errors.add(:count, ': 残りの座席数を超えるため予約できません')
   end
 end

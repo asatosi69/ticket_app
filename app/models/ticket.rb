@@ -34,6 +34,8 @@ class Ticket < ApplicationRecord
   after_destroy :notice_mail_for_destroy_ticket
   after_commit :calc_stage_end_flag
 
+  validate :not_over_remain_count_of_seat, unless: -> { validation_context == :admin }
+
   def self.sumup_all_ticket_price
     joins(:type).pluck(:count, :price).map { |count, price| count * price }.sum
   end
@@ -114,5 +116,11 @@ class Ticket < ApplicationRecord
 
   def notice_mail_for_destroy_ticket
     UserMailer.notice_mail_for_destroy_ticket(self).deliver_now
+  end
+
+  def not_over_remain_count_of_seat
+    return if stage.remain_count_of_seat >= type.seat * count
+
+    errors.add(:count, ': 残りの座席数を超えるため予約できません')
   end
 end
