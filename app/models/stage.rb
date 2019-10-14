@@ -49,7 +49,7 @@ class Stage < ApplicationRecord
   def calc_end_flag!
     return if self[:end_flag]
 
-    if deadline.past? || calc_adequacy_ratio >= 100
+    if deadline&.past? || calc_adequacy_ratio >= 100
       update_attribute(:end_flag, true)
       true
     else
