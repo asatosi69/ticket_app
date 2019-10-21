@@ -38,8 +38,10 @@
   <tr>
     <th>販売済</th>
     <% total = 0 %>
-    <% @stage_ticket_seats.each do |ticket_seats| %>
-      <td><%= ticket_seats %></td>
+    <% @stage_ticket_seats_info.each do |ticket_seats_info| %>
+      <td>
+        <%= ticket_seats_info[:total_seats_count] %>
+      </td>
     <% end %>
     <td><%= @sum_of_stage_ticket_seats %></td>
   </tr>

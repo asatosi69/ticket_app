@@ -48,6 +48,28 @@ class Ticket < ApplicationRecord
     summary
   end
 
+  def self.calc_summary_for_stage(stage)
+    tickets = Ticket.where(stage_id: stage.id)
+    counts_by_type = []
+    Type.all.each do |t|
+      counts_by_type << {
+        type_id: t.id,
+        type_name: t.kind,
+        color_code: t.color.color_code,
+        count: tickets.where(type_id: t.id).pluck(:count).sum
+      }
+    end
+    total_seats_count = tickets.inject(0) do |sum, ticket|
+      sum + ticket.type.seat * ticket.count
+    end
+    {
+      stage_id: stage.id,
+      stage_performance: stage.performance,
+      total_seats_count: total_seats_count,
+      counts_by_type: counts_by_type
+    }
+  end
+
   def self.calc_summary_for_user(user)
     summary = {}
     summary[:user_id] = user.id

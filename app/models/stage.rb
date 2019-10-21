@@ -37,7 +37,11 @@ class Stage < ApplicationRecord
   end
 
   def sumup_ticket_seat
-    tickets.inject(0) { |sum, ticket| sum += ticket.type.seat * ticket.count}
+    sumup_ticket_seat_info[:total_seats_count]
+  end
+
+  def sumup_ticket_seat_info
+    @sumup_ticket_seat_cache ||= Ticket.calc_summary_for_stage(self)
   end
 
   def end_flag
