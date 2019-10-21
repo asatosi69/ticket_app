@@ -46,14 +46,19 @@
         <% end %>
       </td>
     <% end %>
-    <td><%= @sum_of_stage_ticket_seats %></td>
+    <td>
+      <%= @sum_of_stage_ticket_seats[:total_seats_count] %>
+      <% @sum_of_stage_ticket_seats[:count_by_type_summary].each do |_type_id, summary| %>
+        <span style='color: <%= summary[:color_code] %>;'>(<%= summary[:count] %>)</span>
+      <% end %>
+    </td>
   </tr>
   <tr>
     <th>充足率</th>
     <% @stages.each do |stage| %>
       <td><%= stage.calc_adequacy_ratio.to_i %></td>
     <% end %>
-    <td><%= ((@sum_of_stage_ticket_seats.to_f / @sum_of_stage_total.to_f) * 100).to_i %></td>
+    <td><%= ((@sum_of_stage_ticket_seats[:total_seats_count].to_f / @sum_of_stage_total.to_f) * 100).to_i %></td>
   </tr>
 </table>
 <script>
