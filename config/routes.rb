@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :links
   resources :users, only: [] do
     member do
       get :register, to: 'registers#new'
