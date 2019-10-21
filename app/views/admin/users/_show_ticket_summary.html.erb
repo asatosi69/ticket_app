@@ -41,6 +41,9 @@
     <% @stage_ticket_seats_info.each do |ticket_seats_info| %>
       <td>
         <%= ticket_seats_info[:total_seats_count] %>
+        <% ticket_seats_info[:counts_by_type].each do |count_by_type| %>
+          <span style='color: <%= count_by_type[:color_code] %>;'>(<%= count_by_type[:count] %>)</span>
+        <% end %>
       </td>
     <% end %>
     <td><%= @sum_of_stage_ticket_seats %></td>
