@@ -1,0 +1,21 @@
+<div id='js-current_user_id' data-current_user_id='<%= current_user.id %>'></div>
+<table class='index_table' id='summary_table'>
+  <th></th>
+  <% Type.kind_order.each do |type| %>
+    <th><%= type.kind %></th>
+  <% end %>
+  <% Stage.includes(:links).performance_order.each do |stage| %>
+    <tr>
+      <td><%= stage.performance  %></td>
+      <% Type.kind_order.each do |type| %>
+        <td>
+          <% if stage.links.find_by(type_id: type.id) %>
+            TODO:チェックボックスをONで表示する
+          <% else %>
+            TODO:チェックボックスをOFFで表示する
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

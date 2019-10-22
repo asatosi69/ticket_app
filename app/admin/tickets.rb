@@ -110,4 +110,8 @@ index do
       row :comment2
     end
   end
+  collection_action :edit_ticket_links, method: :get do
+    @page_title = "公演とチケット種別の組み合わせ"
+    render '_edit_ticket_links'
+  end
 end
