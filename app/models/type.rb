@@ -19,6 +19,8 @@ class Type < ApplicationRecord
     validates :price, numericality: { greater_than_or_equal_to: 0 }  #この行を追加しました(2019/1/22)
     validates :color_id, presence: true, uniqueness: true
 
+  scope :kind_order, -> { order(kind: :asc) }
+
   before_destroy :validate_ticket_presence
 
   private

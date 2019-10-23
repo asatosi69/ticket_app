@@ -43,11 +43,24 @@ ActiveAdmin.register User do
     @stages = Stage.performance_order
     @ticket_summary_for_all = Ticket.calc_summary_for_all
     @sum_of_stage_total = @stages.pluck(:total).sum
-    @stage_ticket_seats = []
+    @stage_ticket_seats_info = []
     @stages.each do |stage|
-      @stage_ticket_seats << stage.sumup_ticket_seat
+      @stage_ticket_seats_info << stage.sumup_ticket_seat_info
     end
-    @sum_of_stage_ticket_seats = @stage_ticket_seats.inject(:+)
+    @sum_of_stage_ticket_seats = {}
+    @sum_of_stage_ticket_seats[:total_seats_count] =
+      @stage_ticket_seats_info.map { |v| v[:total_seats_count] }.inject(:+)
+    count_by_type_summary = {}
+    @stage_ticket_seats_info.map { |stage_summary| stage_summary[:counts_by_type] }.each do |count_by_types|
+      count_by_types.each do |count_by_type|
+        type_id = count_by_type[:type_id]
+        count_by_type_summary[type_id] ||= {}
+        count_by_type_summary[type_id][:color_code] ||= count_by_type[:color_code]
+        count_by_type_summary[type_id][:count] ||= 0
+        count_by_type_summary[type_id][:count] += count_by_type[:count]
+      end
+    end
+    @sum_of_stage_ticket_seats[:count_by_type_summary] = count_by_type_summary
     render '_show_ticket_summary'
   end
 end

@@ -218,6 +218,7 @@ ActiveAdmin.setup do |config|
   config.namespace :admin do |admin|
     admin.build_menu do |menu|
       menu.add label: '集計', url: '/admin/users/show_ticket_summary', html_options: { }, priority: 1
+      menu.add label: '公演とチケットの組み合わせ', url: '/admin/tickets/edit_ticket_links', html_options: { }, priority: 2
     end
   end
   #

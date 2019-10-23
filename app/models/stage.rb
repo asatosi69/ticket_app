@@ -13,6 +13,7 @@
 
 class Stage < ApplicationRecord
   has_many :tickets
+  has_many :links
 
   validates :performance, presence: true # この行を追加しました(2019/1/22)
   validates :total, numericality: { greater_than_or_equal_to: 0 } # この行を追加しました(2019/1/22)
@@ -37,7 +38,11 @@ class Stage < ApplicationRecord
   end
 
   def sumup_ticket_seat
-    tickets.inject(0) { |sum, ticket| sum += ticket.type.seat * ticket.count}
+    sumup_ticket_seat_info[:total_seats_count]
+  end
+
+  def sumup_ticket_seat_info
+    @sumup_ticket_seat_cache ||= Ticket.calc_summary_for_stage(self)
   end
 
   def end_flag

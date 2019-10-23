@@ -53,9 +53,9 @@ index do
         f.input :user_id, input_html: { value: current_user.id }, as: :hidden
       end
       if current_user.admin?
-        f.input :stage_id, as: :select, collection: Stage.pluck(:performance, :id).to_h
+        f.input :stage_id, as: :select, collection: Stage.performance_order.pluck(:performance, :id).to_h
       else
-        f.input :stage_id, as: :select, collection: Stage.on_sale.pluck(:performance, :id).to_h
+        f.input :stage_id, as: :select, collection: Stage.performance_order.on_sale.pluck(:performance, :id).to_h
       end
       f.input :type_id, as: :select, collection: Type.pluck(:kind, :id).to_h
       f.input :count
@@ -109,5 +109,9 @@ index do
       row :comment
       row :comment2
     end
+  end
+  collection_action :edit_ticket_links, method: :get do
+    @page_title = "公演とチケット種別の組み合わせ"
+    render '_edit_ticket_links'
   end
 end

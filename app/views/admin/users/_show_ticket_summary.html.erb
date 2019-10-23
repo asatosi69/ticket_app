@@ -38,17 +38,27 @@
   <tr>
     <th>販売済</th>
     <% total = 0 %>
-    <% @stage_ticket_seats.each do |ticket_seats| %>
-      <td><%= ticket_seats %></td>
+    <% @stage_ticket_seats_info.each do |ticket_seats_info| %>
+      <td>
+        <%= ticket_seats_info[:total_seats_count] %>
+        <% ticket_seats_info[:counts_by_type].each do |count_by_type| %>
+          <span style='color: <%= count_by_type[:color_code] %>;'>(<%= count_by_type[:count] %>)</span>
+        <% end %>
+      </td>
     <% end %>
-    <td><%= @sum_of_stage_ticket_seats %></td>
+    <td>
+      <%= @sum_of_stage_ticket_seats[:total_seats_count] %>
+      <% @sum_of_stage_ticket_seats[:count_by_type_summary].each do |_type_id, summary| %>
+        <span style='color: <%= summary[:color_code] %>;'>(<%= summary[:count] %>)</span>
+      <% end %>
+    </td>
   </tr>
   <tr>
     <th>充足率</th>
     <% @stages.each do |stage| %>
       <td><%= stage.calc_adequacy_ratio.to_i %></td>
     <% end %>
-    <td><%= ((@sum_of_stage_ticket_seats.to_f / @sum_of_stage_total.to_f) * 100).to_i %></td>
+    <td><%= ((@sum_of_stage_ticket_seats[:total_seats_count].to_f / @sum_of_stage_total.to_f) * 100).to_i %></td>
   </tr>
 </table>
 <script>
