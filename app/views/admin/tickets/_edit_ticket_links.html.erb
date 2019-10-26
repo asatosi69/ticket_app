@@ -9,13 +9,40 @@
       <td><%= stage.performance  %></td>
       <% Type.kind_order.each do |type| %>
         <td>
-          <% if stage.links.find_by(type_id: type.id) %>
-            TODO:チェックボックスをONで表示する
+          <% if stage.end_flag? %>
+            -
           <% else %>
-            TODO:チェックボックスをOFFで表示する
+            <% if link = stage.links.find_by(type_id: type.id) %>
+              <input type='checkbox' checked value='1' class='js-link-post'
+                data-url='<%=link_path(link.id) %>'
+                data-method='DELETE'
+              />
+            <% else %>
+              <input type='checkbox' value='1' class='js-link-post'
+                data-url='<%=links_path %>'
+                data-stage_id='<%= stage.id%>'
+                data-type_id='<%= type.id%>'
+                data-method='POST'
+              />
+            <% end %>
           <% end %>
         </td>
       <% end %>
     </tr>
   <% end %>
 </table>
+<script>
+  $('.js-link-post').click(function() {
+  var checked;
+  url = $(this).data('url');
+  method = $(this).data('method');
+  $.ajax({
+      type: method,
+      url: url,
+    data: {
+      stage_id: $(this).data('type_id'),
+      type_id: $(this).data('stage_id')
+    }
+   });
+  });
+</script>
