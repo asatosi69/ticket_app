@@ -10,7 +10,6 @@ class Ability
       # Ticketは、自身のものだけは管理できる
       can :manage, Ticket, user: user
       can :create, Ticket
-      cannot :update, Ticket, id: Ticket.join_links.pluck(:id) # linkテーブルに紐づくticketは更新できない
     end
     # Define abilities for the passed in user here. For example:
     #

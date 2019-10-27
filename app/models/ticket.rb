@@ -22,17 +22,6 @@ class Ticket < ApplicationRecord
   accepts_nested_attributes_for :stage
   belongs_to :type
   accepts_nested_attributes_for :type
-  scope :join_links, -> {
-    joins(<<-SQL
-    INNER JOIN
-      links
-      ON
-        links.stage_id = tickets.stage_id
-        AND
-        links.type_id = tickets.type_id
-    SQL
-    )
-  }
 
   validates :user_id, presence: true #この行を追加しました(2019/1/22)
   validates :stage_id, presence: true #この行を追加しました(2019/1/22)
@@ -46,6 +35,7 @@ class Ticket < ApplicationRecord
   after_commit :calc_stage_end_flag
 
   validate :not_over_remain_count_of_seat, unless: -> { validation_context == :admin }
+  validate :check_conbitation_of_type_and_stage, unless: -> { validation_context == :admin }
 
   def self.sumup_all_ticket_price
     joins(:type).pluck(:count, :price).map { |count, price| count * price }.sum
@@ -155,5 +145,12 @@ class Ticket < ApplicationRecord
     return if stage.remain_count_of_seat >= type.seat * count
 
     errors.add(:count, ': 残りの座席数を超えるため予約できません')
+  end
+
+  def check_conbitation_of_type_and_stage
+    return unless Link.find_by(stage_id: stage_id, type_id: type_id)
+
+    errors.add(:stage_id, '選択いただいた『開演日時 / チケット種別』の組み合わせでは予約を承ることができません。')
+    errors.add(:type_id, '')
   end
 end
