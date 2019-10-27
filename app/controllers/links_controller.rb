@@ -2,10 +2,12 @@
 
 class LinksController < ApplicationController
   def create
-    Link.new(type_id: params[:type_id], stage_id: params[:stage_id]).save
+    @link = Link.new(type_id: params[:type_id], stage_id: params[:stage_id])
+    @link.save
   end
 
   def destroy
-    Link.find(params[:id]).destroy
+    @link = Link.find(params[:id])
+    @link.destroy
   end
 end

@@ -20,21 +20,14 @@
           <% if stage.end_flag? %>
             -
           <% else %>
-            <% if link = stage.links.find_by(type_id: type.id) %>
-              <input type='checkbox' checked value='1' class='js-link-post'
-                style="cursor: pointer"
-                data-url='<%=link_path(link.id) %>'
-                data-method='DELETE'
-              />
-            <% else %>
-              <input type='checkbox' value='1' class='js-link-post'
-                style="cursor: pointer"
-                data-url='<%=links_path %>'
-                data-stage_id='<%= stage.id%>'
-                data-type_id='<%= type.id%>'
-                data-method='POST'
-              />
-            <% end %>
+            <span id="chk_stage<%= stage.id %>_type<%= type.id %>">
+              <% if link = stage.links.find_by(type_id: type.id) %>
+                <%= render '/links/link_destroy_check_box', link: link %>
+              </span>
+              <% else %>
+                <%= render '/links/link_create_check_box', stage_id: stage.id, type_id: type.id %>
+              <% end %>
+            </span>
           <% end %>
         </td>
       <% end %>
@@ -42,17 +35,14 @@
   <% end %>
 </table>
 <script>
-  $('.js-link-post').click(function() {
-  var checked;
-  url = $(this).data('url');
-  method = $(this).data('method');
-  $.ajax({
-      type: method,
-      url: url,
-    data: {
-      stage_id: $(this).data('type_id'),
-      type_id: $(this).data('stage_id')
-    }
-   });
-  });
+  function link_post(url, method, type_id, stage_id) {
+    $.ajax({
+        type: method,
+        url: url,
+      data: {
+        stage_id: stage_id,
+        type_id: type_id
+      }
+    });
+  }
 </script>
