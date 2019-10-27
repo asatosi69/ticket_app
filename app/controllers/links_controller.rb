@@ -8,6 +8,4 @@ class LinksController < ApplicationController
   def destroy
     Link.find(params[:id]).destroy
   end
-
-  private
 end
