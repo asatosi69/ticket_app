@@ -6,10 +6,11 @@ class Ability
     if user.admin?
       can :manage, :all
     else
+      can :read, ActiveAdmin::Page, name: 'Dashboard'
       # Ticketは、自身のものだけは管理できる
       can :manage, Ticket, user: user
-      can :read, ActiveAdmin::Page, name: 'Dashboard'
       can :create, Ticket
+      cannot :update, Ticket, id: Ticket.join_links.pluck(:id) # linkテーブルに紐づくticketは更新できない
     end
     # Define abilities for the passed in user here. For example:
     #
