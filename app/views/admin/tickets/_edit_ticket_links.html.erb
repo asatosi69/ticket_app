@@ -1,4 +1,12 @@
 <div id='js-current_user_id' data-current_user_id='<%= current_user.id %>'></div>
+<p>
+『-』(ハイフン)がついている項目は、『販売終了フラグ』が ON のため、一般取扱者はチケットの操作ができません。
+一般取扱者が操作をするためには、『販売終了フラグ』を『OFF』にしてください。
+</p>
+<p>
+☑がついている項目は、一般取扱者はチケットの操作ができません。
+一般取扱者が操作をするためには、☑を□にしてください。
+</p>
 <table class='index_table' id='summary_table' style="text-align: center">
   <th></th>
   <% Type.kind_order.each do |type| %>
