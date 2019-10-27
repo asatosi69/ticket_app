@@ -14,11 +14,13 @@
           <% else %>
             <% if link = stage.links.find_by(type_id: type.id) %>
               <input type='checkbox' checked value='1' class='js-link-post'
+                style="cursor: pointer"
                 data-url='<%=link_path(link.id) %>'
                 data-method='DELETE'
               />
             <% else %>
               <input type='checkbox' value='1' class='js-link-post'
+                style="cursor: pointer"
                 data-url='<%=links_path %>'
                 data-stage_id='<%= stage.id%>'
                 data-type_id='<%= type.id%>'
