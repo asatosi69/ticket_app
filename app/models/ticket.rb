@@ -22,6 +22,17 @@ class Ticket < ApplicationRecord
   accepts_nested_attributes_for :stage
   belongs_to :type
   accepts_nested_attributes_for :type
+  scope :join_links, -> {
+    joins(<<-SQL
+    INNER JOIN
+      links
+      ON
+        links.stage_id = tickets.stage_id
+        AND
+        links.type_id = tickets.type_id
+    SQL
+    )
+  }
 
   validates :user_id, presence: true #この行を追加しました(2019/1/22)
   validates :stage_id, presence: true #この行を追加しました(2019/1/22)

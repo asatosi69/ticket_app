@@ -1,0 +1,6 @@
+<% # stage_id: required %>
+<% # type_id: required %>
+<input type='checkbox' value='1' class='js-link-post'
+  style="cursor: pointer"
+  onClick="link_post('<%=links_path %>', 'POST','<%= type_id %>', '<%= stage_id %>');"
+/>

@@ -1,5 +1,13 @@
 <div id='js-current_user_id' data-current_user_id='<%= current_user.id %>'></div>
-<table class='index_table' id='summary_table'>
+<p>
+『-』(ハイフン)がついている項目は、『販売終了フラグ』が ON のため、一般取扱者はチケットの操作ができません。
+一般取扱者が操作をするためには、『販売終了フラグ』を『OFF』にしてください。
+</p>
+<p>
+☑がついている項目は、一般取扱者はチケットの操作ができません。
+一般取扱者が操作をするためには、☑を□にしてください。
+</p>
+<table class='index_table' id='summary_table' style="text-align: center">
   <th></th>
   <% Type.kind_order.each do |type| %>
     <th><%= type.kind %></th>
@@ -9,13 +17,32 @@
       <td><%= stage.performance  %></td>
       <% Type.kind_order.each do |type| %>
         <td>
-          <% if stage.links.find_by(type_id: type.id) %>
-            TODO:チェックボックスをONで表示する
+          <% if stage.end_flag? %>
+            -
           <% else %>
-            TODO:チェックボックスをOFFで表示する
+            <span id="chk_stage<%= stage.id %>_type<%= type.id %>">
+              <% if link = stage.links.find_by(type_id: type.id) %>
+                <%= render '/links/link_destroy_check_box', link: link %>
+              </span>
+              <% else %>
+                <%= render '/links/link_create_check_box', stage_id: stage.id, type_id: type.id %>
+              <% end %>
+            </span>
           <% end %>
         </td>
       <% end %>
     </tr>
   <% end %>
 </table>
+<script>
+  function link_post(url, method, type_id, stage_id) {
+    $.ajax({
+        type: method,
+        url: url,
+      data: {
+        stage_id: stage_id,
+        type_id: type_id
+      }
+    });
+  }
+</script>

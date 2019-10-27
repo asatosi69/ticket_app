@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :links, only: %i[create destroy]
+
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self) rescue ActiveAdmin::DatabaseHitDuringLoad
   get 'welcome/index'

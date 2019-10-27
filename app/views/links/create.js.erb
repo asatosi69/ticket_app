@@ -1,0 +1,4 @@
+console.log('created');
+$('#chk_stage<%= @link.stage_id %>_type<%= @link.type_id %>').html(
+  "<%= j(render '/links/link_destroy_check_box', link: @link) %>"
+);
