@@ -5,6 +5,11 @@ class Register < ApplicationRecord
   belongs_to :type
   enum state: { init: 0, confirmed: 10 }
 
+  validates :stage_id, presence: true
+  validates :type_id, presence: true
+  validates :count, numericality: { greater_than_or_equal_to: 0 }
+  validates :b_name, presence: true
+
   validate :not_over_remain_count_of_seat
 
   validate :check_conbitation_of_type_and_stage, unless: -> { validation_context == :admin }
