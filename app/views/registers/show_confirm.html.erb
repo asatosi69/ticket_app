@@ -8,9 +8,9 @@
 
   <%= form.hidden_field :register_id, id: :register_id, value: @register.id %>
 
-  <div class="field">
-    <%= form.label :count %>
-    <%= form.number_field :count, id: :register_count, disabled: true, class: 'form-control' %>
+  <div class="form-group">
+    <%= User.human_attribute_name(:name) %>
+    <%= text_field_tag :user_name, register.user.name, disabled: :disabled, class: 'form-control' %>
   </div>
 
   <div class="field">
