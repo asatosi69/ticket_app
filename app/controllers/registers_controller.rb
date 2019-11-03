@@ -34,8 +34,10 @@ class RegistersController < ApplicationController
 
   def to_confirm
     @register = Register.find(params[:register][:register_id])
-    if @register.generate_ticket
+    if @register.valid? && @register.generate_ticket
       redirect_to thankyou_user_path(@register.user.id) and return
+    else
+      render action: :edit
     end
   end
 
