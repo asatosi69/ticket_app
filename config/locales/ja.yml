@@ -67,6 +67,7 @@ ja:
         b_email: お客様のメールアドレス
         stage: 公演
         type: チケット種別
+        stage_and_type: 公演とチケット種別の組み合わせ
         comment: ひとこと
 
   access_denined: 許可されていない操作が実行されました。
