@@ -5,8 +5,14 @@ class Register < ApplicationRecord
   belongs_to :type
   enum state: { init: 0, confirmed: 10 }
 
+  validates :stage_id, presence: true
+  validates :type_id, presence: true
+  validates :count, numericality: { greater_than: 0 }
+  validates :b_name, presence: true
+
   validate :not_over_remain_count_of_seat
 
+  validate :check_conbitation_of_type_and_stage, unless: -> { validation_context == :admin }
   def generate_ticket
     ticket = Ticket.create(
       user_id: user_id,
@@ -28,5 +34,11 @@ class Register < ApplicationRecord
     return if stage.remain_count_of_seat >= type.seat * count
 
     errors.add(:count, ': 残りの座席数を超えるため予約できません')
+  end
+
+  def check_conbitation_of_type_and_stage
+    return unless Link.find_by(stage_id: stage_id, type_id: type_id)
+
+    errors.add(:stage_and_type, '：選択いただいた『開演日時 / チケット種別』の組み合わせでは予約を承ることができません。')
   end
 end

@@ -26,7 +26,7 @@ class Ticket < ApplicationRecord
   validates :user_id, presence: true #この行を追加しました(2019/1/22)
   validates :stage_id, presence: true #この行を追加しました(2019/1/22)
   validates :type_id, presence: true #この行を追加しました(2019/1/22)
-  validates :count, numericality: { greater_than_or_equal_to: 0 } #この行を追加しました(2019/1/22)
+  validates :count, numericality: { greater_than: 0 } #この行を追加しました(2019/1/22)
   validates :b_name, presence: true #この行を追加しました(2019/1/22)
 
   after_create :notice_mail_for_create_ticket
