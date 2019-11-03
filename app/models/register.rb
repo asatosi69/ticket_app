@@ -7,7 +7,7 @@ class Register < ApplicationRecord
 
   validates :stage_id, presence: true
   validates :type_id, presence: true
-  validates :count, numericality: { greater_than_or_equal_to: 0 }
+  validates :count, numericality: { greater_than: 0 }
   validates :b_name, presence: true
 
   validate :not_over_remain_count_of_seat
