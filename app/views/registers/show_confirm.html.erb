@@ -10,7 +10,7 @@
 
   <div class="form-group">
     <%= User.human_attribute_name(:name) %>
-    <%= text_field_tag :user_name, register.user.name, disabled: :disabled, class: 'form-control' %>
+    <%= text_field_tag :user_name, @register.user.name, disabled: :disabled, class: 'form-control' %>
   </div>
 
   <div class="field">
