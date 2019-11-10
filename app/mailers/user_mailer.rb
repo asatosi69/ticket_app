@@ -1,13 +1,4 @@
 class UserMailer < ApplicationMailer
-  def ticket_issued(ticket)
-    return if ticket.b_mail.blank?
-    @ticket = ticket
-    mail(
-      to: @ticket.b_mail,
-      subject: "'#{Rails.application.config.troupe_name}『#{Rails.application.config.performance_name}』のご予約を承りました'"
-    )
-  end
-
   def notice_mail_for_create_ticket(ticket)
     return if ticket.b_mail.blank?
     @ticket = ticket
