@@ -54,6 +54,7 @@ ja:
       ticket:
         count: チケット枚数
         b_name: お客様のお名前
+        furigana: フリガナ
         b_mail: お客様のメールアドレス
         comment: コメント
         comment2: 備考
@@ -64,6 +65,7 @@ ja:
       register:
         count: チケット枚数
         b_name: お客様のお名前
+        furigana: フリガナ
         b_email: お客様のメールアドレス
         stage: 公演
         type: チケット種別

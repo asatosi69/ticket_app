@@ -20,6 +20,7 @@ class Register < ApplicationRecord
       type_id: type_id,
       count: count,
       b_name: b_name,
+      furigana: furigana,
       b_mail: b_email,
       comment: comment
     )

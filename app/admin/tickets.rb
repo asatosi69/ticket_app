@@ -12,7 +12,7 @@ ActiveAdmin.register Ticket do
 #   permitted
 # end
 
-permit_params :count, :b_name, :b_mail, :comment, :user_id, :stage_id, :type_id, :comment2, users_attributes: [:name], stages_attributes: [:performance], types_attributes: [:kind]
+permit_params :count, :b_name, :furigana, :b_mail, :comment, :user_id, :stage_id, :type_id, :comment2, users_attributes: [:name], stages_attributes: [:performance], types_attributes: [:kind]
 
 
 index do
@@ -29,6 +29,7 @@ index do
     end
     column :count
     column :b_name
+    column :furigana
     column :b_mail
     column :comment
     column :comment2 #comment2 を追加しました(2019/1/22)
@@ -40,6 +41,7 @@ index do
     filter :type_kind, label: Type.human_attribute_name(:kind), as: :select, collection: Type.pluck(:kind)
     # filter :count コメント化しました(2019/1/22)
     filter :b_name
+    filter :furigana
     # filter :b_mail コメント化しました(2019/1/22)
     filter :comment2 # comment から comment2 に変更しました(2019/1/22)
 
@@ -60,6 +62,7 @@ index do
       f.input :type_id, as: :select, collection: Type.pluck(:kind, :id).to_h
       f.input :count
       f.input :b_name
+      f.input :furigana
       f.input :b_mail
       f.input :comment
       f.input :comment2
@@ -105,6 +108,7 @@ index do
       end
       row :count
       row :b_name
+      row :furigana
       row :b_mail
       row :comment
       row :comment2

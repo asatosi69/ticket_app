@@ -34,6 +34,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :furigana %>
+    <%= form.text_field :furigana, id: :register_furigana, disabled: true, class: 'form-control' %>
+  </div>
+
+  <div class="field">
     <%= form.label :b_email %>
     <%= form.text_field :b_email, id: :register_b_email, disabled: true, class: 'form-control' %>
   </div>
