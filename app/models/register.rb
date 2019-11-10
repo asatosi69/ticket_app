@@ -25,7 +25,6 @@ class Register < ApplicationRecord
     )
     self.ticket = ticket
     confirmed!
-    UserMailer.ticket_issued(ticket).deliver_now
   end
 
   private
