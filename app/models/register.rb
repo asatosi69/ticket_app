@@ -9,6 +9,7 @@ class Register < ApplicationRecord
   validates :type_id, presence: true
   validates :count, numericality: { greater_than: 0 }
   validates :b_name, presence: true
+  validates :furigana, presence: true
 
   validate :not_over_remain_count_of_seat
 

@@ -28,6 +28,7 @@ class Ticket < ApplicationRecord
   validates :type_id, presence: true #この行を追加しました(2019/1/22)
   validates :count, numericality: { greater_than: 0 } #この行を追加しました(2019/1/22)
   validates :b_name, presence: true #この行を追加しました(2019/1/22)
+  validates :furigana, presence: true
 
   after_create :notice_mail_for_create_ticket
   after_update :notice_mail_for_update_ticket
