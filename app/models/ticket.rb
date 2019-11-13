@@ -73,6 +73,13 @@ class Ticket < ApplicationRecord
     }
   end
 
+  SummaryForStageAndUser = Struct.new(
+    :stage_id,
+    :stage_performance,
+    :total_seats_count,
+    :counts_by_type
+  )
+
   SummaryCountByType = Struct.new(
     :type_id,
     :type_name,
@@ -123,12 +130,12 @@ class Ticket < ApplicationRecord
     total_seats_count = tickets.inject(0) do |sum, ticket|
       sum + ticket.type.seat * ticket.count
     end
-    {
-      stage_id: stage.id,
-      stage_performance: stage.performance,
-      total_seats_count: total_seats_count,
-      counts_by_type: counts_by_type
-    }
+    summary_for_stage_and_user = SummaryForStageAndUser.new
+    summary_for_stage_and_user.stage_id = stage.id
+    summary_for_stage_and_user.stage_performance = stage.performance
+    summary_for_stage_and_user.total_seats_count = total_seats_count
+    summary_for_stage_and_user.counts_by_type = counts_by_type
+    summary_for_stage_and_user
   end
   private_class_method :calc_summary_for_stage_and_user
 
