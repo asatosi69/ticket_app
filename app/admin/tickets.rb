@@ -28,8 +28,8 @@ index do
       t.type.kind
     end
     column :count
-    column :b_name
     column :furigana
+    column :b_name
     column :b_mail
     column :comment
     column :comment2 #comment2 を追加しました(2019/1/22)
@@ -39,9 +39,9 @@ index do
     filter :user_name, label: User.human_attribute_name(:name), as: :select, collection: User.pluck(:name)
     filter :stage_performance, label: Stage.human_attribute_name(:performance), as: :select, collection: Stage.pluck(:performance)
     filter :type_kind, label: Type.human_attribute_name(:kind), as: :select, collection: Type.pluck(:kind)
+    filter :furigana
     # filter :count コメント化しました(2019/1/22)
     filter :b_name
-    filter :furigana
     # filter :b_mail コメント化しました(2019/1/22)
     filter :comment2 # comment から comment2 に変更しました(2019/1/22)
 
@@ -61,8 +61,8 @@ index do
       end
       f.input :type_id, as: :select, collection: Type.pluck(:kind, :id).to_h
       f.input :count
-      f.input :b_name
       f.input :furigana
+      f.input :b_name
       f.input :b_mail
       f.input :comment
       f.input :comment2
@@ -107,8 +107,8 @@ index do
         t.type.kind
       end
       row :count
-      row :b_name
       row :furigana
+      row :b_name
       row :b_mail
       row :comment
       row :comment2

@@ -9,6 +9,9 @@ class Register < ApplicationRecord
   validates :type_id, presence: true
   validates :count, numericality: { greater_than: 0 }
   validates :b_name, presence: true
+  validates :furigana, presence: true
+
+  validate :check_furigana_is_zenkaku_kana
 
   validate :not_over_remain_count_of_seat
 
@@ -40,5 +43,9 @@ class Register < ApplicationRecord
     return unless Link.find_by(stage_id: stage_id, type_id: type_id)
 
     errors.add(:stage_and_type, '：選択いただいた『開演日時 / チケット種別』の組み合わせでは予約を承ることができません。')
+  end
+
+  def check_furigana_is_zenkaku_kana
+    errors.add(:furigana, 'は、全角カタカナで入力してください。') if furigana !~ /\A[ァ-ヶー－]+\z/
   end
 end
