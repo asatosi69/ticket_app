@@ -73,6 +73,14 @@ class Ticket < ApplicationRecord
     }
   end
 
+  SummaryForUser = Struct.new(
+    :user_id,
+    :user_name,
+    :total_counts,
+    :counts_by_stage,
+    :summary_counts_by_type
+  )
+
   SummaryForStageAndUser = Struct.new(
     :stage_id,
     :stage_performance,
@@ -88,9 +96,9 @@ class Ticket < ApplicationRecord
   )
 
   def self.calc_summary_for_user(user)
-    summary = {}
-    summary[:user_id] = user.id
-    summary[:user_name] = user.name
+    summary = SummaryForUser.new
+    summary.user_id = user.id
+    summary.user_name = user.name
     counts_by_stage = []
     summary_total_seats = 0
     summary_counts_by_type = {}
@@ -108,11 +116,11 @@ class Ticket < ApplicationRecord
       summary_total_seats += count_by_stage[:total_seats_count]
 
     end
-    summary[:total_counts] = {
+    summary.total_counts = {
       summary_total_seats: summary_total_seats
     }
-    summary[:counts_by_stage] = counts_by_stage
-    summary[:summary_counts_by_type] = summary_counts_by_type
+    summary.counts_by_stage = counts_by_stage
+    summary.summary_counts_by_type = summary_counts_by_type
     summary
   end
 
