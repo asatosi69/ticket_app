@@ -114,7 +114,7 @@ class Ticket < ApplicationRecord
     counts_by_type = []
     Type.all.each do |t|
       count_by_type = SummaryCountByType.new
-      count_by_type.type_id = t.id,
+      count_by_type.type_id = t.id
       count_by_type.type_name = t.kind
       count_by_type.color_code = t.color.color_code
       count_by_type.count = tickets.where(type_id: t.id).pluck(:count).sum
