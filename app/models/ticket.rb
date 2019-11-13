@@ -73,6 +73,13 @@ class Ticket < ApplicationRecord
     }
   end
 
+  SummaryCountByType = Struct.new(
+    :type_id,
+    :type_name,
+    :color_code,
+    :count
+  )
+
   def self.calc_summary_for_user(user)
     summary = {}
     summary[:user_id] = user.id
@@ -84,12 +91,12 @@ class Ticket < ApplicationRecord
       count_by_stage = calc_summary_for_stage_and_user(stage: s, user: user)
       counts_by_stage << count_by_stage
       count_by_stage[:counts_by_type].each do |v|
-        summary_counts_by_type[:"#{v[:type_id]}"] ||= {
-          type_name: v[:type_name],
+        summary_counts_by_type[:"#{v.type_id}"] ||= {
+          type_name: v.type_name,
           count: 0
         }
-        summary_counts_by_type[:"#{v[:type_id]}"][:count] += v[:count]
-        summary_counts_by_type[:"#{v[:type_id]}"][:color_code] ||= v[:color_code]
+        summary_counts_by_type[:"#{v.type_id}"][:count] += v.count
+        summary_counts_by_type[:"#{v.type_id}"][:color_code] ||= v.color_code
       end
       summary_total_seats += count_by_stage[:total_seats_count]
 
@@ -106,12 +113,12 @@ class Ticket < ApplicationRecord
     tickets = Ticket.where(stage_id: stage.id, user_id: user.id)
     counts_by_type = []
     Type.all.each do |t|
-      counts_by_type << {
-        type_id: t.id,
-        type_name: t.kind,
-        color_code: t.color.color_code,
-        count: tickets.where(type_id: t.id).pluck(:count).sum
-      }
+      count_by_type = SummaryCountByType.new
+      count_by_type.type_id = t.id,
+      count_by_type.type_name = t.kind
+      count_by_type.color_code = t.color.color_code
+      count_by_type.count = tickets.where(type_id: t.id).pluck(:count).sum
+      counts_by_type << count_by_type
     end
     total_seats_count = tickets.inject(0) do |sum, ticket|
       sum + ticket.type.seat * ticket.count
