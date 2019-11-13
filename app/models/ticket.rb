@@ -35,6 +35,7 @@ class Ticket < ApplicationRecord
   after_destroy :notice_mail_for_destroy_ticket
   after_commit :calc_stage_end_flag
 
+  validate :check_furigana_is_zenkaku_kana
   validate :not_over_remain_count_of_seat, unless: -> { validation_context == :admin }
   validate :check_conbitation_of_type_and_stage, unless: -> { validation_context == :admin }
 
@@ -153,5 +154,11 @@ class Ticket < ApplicationRecord
 
     errors.add(:stage_id, '選択いただいた『開演日時 / チケット種別』の組み合わせでは予約を承ることができません。')
     errors.add(:type_id, '')
+  end
+
+  def check_furigana_is_zenkaku_kana
+    return if furigana.blank?
+
+    errors.add(:furigana, 'は、全角カタカナで入力してください。') if furigana !~ /\A[ァ-ヶー－]+\z/
   end
 end
