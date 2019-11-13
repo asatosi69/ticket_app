@@ -18,3 +18,12 @@ Color.create!(color_code: '#000080', color_name: '群青')
 Color.create!(color_code: '#808000', color_name: 'オリーブ')
 Color.create!(color_code: '#800080', color_name: '紫')
 Color.create!(color_code: '#800000', color_name: '栗色')
+
+[
+  { name: '当日精算', discount_rate: 0 },
+  { name: '代引き', discount_rate: 0 },
+  { name: '招待', discount_rate: 100 }
+].each do |hash|
+  PaymentMethod.where(name: hash[:name]).destroy_all
+  PaymentMethod.create!(name: hash[:name], discount_rate: hash[:discount_rate])
+end
