@@ -108,10 +108,10 @@ class Ticket < ApplicationRecord
       count_by_stage[:counts_by_type].each do |v|
         summary_counts_by_type[:"#{v.type_id}"] ||= {
           type_name: v.type_name,
+          color_code: v.color_code,
           count: 0
         }
         summary_counts_by_type[:"#{v.type_id}"][:count] += v.count
-        summary_counts_by_type[:"#{v.type_id}"][:color_code] ||= v.color_code
       end
       summary_total_seats += count_by_stage[:total_seats_count]
 
