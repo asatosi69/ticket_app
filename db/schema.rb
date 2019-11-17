@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191117025829) do
+ActiveRecord::Schema.define(version: 20191117031622) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20191117025829) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "furigana"
+    t.integer "payment_method_id", default: 0, null: false
     t.index ["stage_id"], name: "index_registers_on_stage_id"
     t.index ["ticket_id"], name: "index_registers_on_ticket_id"
     t.index ["type_id"], name: "index_registers_on_type_id"
@@ -90,6 +91,7 @@ ActiveRecord::Schema.define(version: 20191117025829) do
     t.integer "type_id"
     t.text "comment2"
     t.string "furigana"
+    t.integer "payment_method_id", default: 0, null: false
     t.index ["stage_id"], name: "index_tickets_on_stage_id"
     t.index ["type_id"], name: "index_tickets_on_type_id"
     t.index ["user_id"], name: "index_tickets_on_user_id"

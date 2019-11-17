@@ -54,7 +54,7 @@ class RegistersController < ApplicationController
   end
 
   def register_params
-    params.require(:register).permit(:user_id, :count, :b_name, :furigana, :b_email, :stage_id, :type_id, :comment, :state, :ticket_id)
+    params.require(:register).permit(:user_id, :count, :b_name, :furigana, :b_email, :stage_id, :type_id, :payment_method_id, :comment, :state, :ticket_id)
   end
 end
 

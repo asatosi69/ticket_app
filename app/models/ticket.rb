@@ -22,10 +22,12 @@ class Ticket < ApplicationRecord
   accepts_nested_attributes_for :stage
   belongs_to :type
   accepts_nested_attributes_for :type
+  belongs_to :payment_method
 
   validates :user_id, presence: true #この行を追加しました(2019/1/22)
   validates :stage_id, presence: true #この行を追加しました(2019/1/22)
   validates :type_id, presence: true #この行を追加しました(2019/1/22)
+  validates :payment_method_id, presence: true
   validates :count, numericality: { greater_than: 0 } #この行を追加しました(2019/1/22)
   validates :b_name, presence: true #この行を追加しました(2019/1/22)
   validates :furigana, presence: true
