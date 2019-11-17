@@ -106,15 +106,16 @@ class Ticket < ApplicationRecord
       count_by_stage = calc_summary_for_stage_and_user(stage: s, user: user)
       counts_by_stage << count_by_stage
       count_by_stage[:counts_by_type].each do |v|
-        summary_counts_by_type[:"#{v.type_id}"] ||= {
-          type_name: v.type_name,
-          color_code: v.color_code,
-          count: 0
-        }
-        summary_counts_by_type[:"#{v.type_id}"][:count] += v.count
+        if summary_counts_by_type[:"#{v.type_id}"].blank?
+          summary_count_by_type = SummaryCountByType.new
+          summary_count_by_type.type_name = v.type_name
+          summary_count_by_type.color_code = v.color_code
+          summary_count_by_type.count = 0
+          summary_counts_by_type[:"#{v.type_id}"] = summary_count_by_type
+        end
+        summary_counts_by_type[:"#{v.type_id}"].count += v.count
       end
-      summary_total_seats += count_by_stage[:total_seats_count]
-
+      summary_total_seats += count_by_stage.total_seats_count
     end
     summary.total_counts = {
       summary_total_seats: summary_total_seats
