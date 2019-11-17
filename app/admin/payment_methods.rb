@@ -18,16 +18,19 @@ ActiveAdmin.register PaymentMethod do
     selectable_column
     id_column
     column :name
+    column :nickname
     column :discount_rate
     actions
   end
 
   filter :name
+  filter :nickname
   filter :discount_rate
 
   form do |f|
     f.inputs do
       f.input :name
+      f.input :nickname
       f.input :discount_rate
     end
     f.actions
@@ -36,6 +39,7 @@ ActiveAdmin.register PaymentMethod do
   show title: :name do
     attributes_table do
       row :name
+      row :nickname
       row :discount_rate
     end
   end
