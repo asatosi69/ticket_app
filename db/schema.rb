@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191110073905) do
+ActiveRecord::Schema.define(version: 20191117025829) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -40,6 +40,14 @@ ActiveRecord::Schema.define(version: 20191110073905) do
     t.datetime "updated_at", null: false
     t.index ["stage_id"], name: "index_links_on_stage_id"
     t.index ["type_id"], name: "index_links_on_type_id"
+  end
+
+  create_table "payment_methods", force: :cascade do |t|
+    t.string "name"
+    t.integer "discount_rate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "nickname", default: "", null: false
   end
 
   create_table "registers", force: :cascade do |t|
