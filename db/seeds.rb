@@ -21,7 +21,7 @@ Color.create!(id: 10, color_code: '#800080', color_name: '紫')
 Color.create!(id: 11, color_code: '#800000', color_name: '栗色')
 
 [
-  { nickname: '当日', name: '当日精算', discount_rate: 0 },
+  { nickname: '当日', name: Rails.application.config.default_payment_method_name, discount_rate: 0 },
   { nickname: '代済', name: '代済み', discount_rate: 0 },
   { nickname: '招待', name: '招待', discount_rate: 100 }
 ].each.with_index(1) do |hash, i|

@@ -23,7 +23,7 @@ class Register < ApplicationRecord
       user_id: user_id,
       stage_id: stage_id,
       type_id: type_id,
-      payment_method_id: PaymentMethod.find_by(name: '当日精算'),
+      payment_method_id: PaymentMethod.find_by(name: Rails.application.config.default_payment_method_name),
       count: count,
       b_name: b_name,
       furigana: furigana,
