@@ -26,5 +26,5 @@ Color.create!(id: 11, color_code: '#800000', color_name: '栗色')
   { nickname: '招待', name: '招待', discount_rate: 100 }
 ].each.with_index(1) do |hash, i|
   PaymentMethod.find_by(id: i)&.destroy
-  PaymentMethod.create!(id: i, name: hash[:name], discount_rate: hash[:discount_rate])
+  PaymentMethod.create!(id: i, name: hash[:name], discount_rate: hash[:discount_rate], nickname: hash[:nickname])
 end
