@@ -22,5 +22,7 @@ module TicketApp
     config.performance_name = 'おにぎり'.freeze
     config.performance_url = 'www.onigiri.com'.freeze
     config.troupe_url = 'www.sankaku.com'.freeze
+
+    config.default_payment_method_name = '当日精算'
   end
 end
