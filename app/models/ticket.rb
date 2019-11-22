@@ -42,7 +42,7 @@ class Ticket < ApplicationRecord
   validate :check_conbitation_of_type_and_stage, unless: -> { validation_context == :admin }
 
   def self.sumup_all_ticket_price
-    joins(:type).pluck(:count, :price).map { |count, price| count * price }.sum
+    joins(:type).joins(:payment_method).pluck(:count, :price, :discount_rate).map { |count, price, discount_rate| (count * price * ((100-discount_rate)/100.to_f)).to_i}.sum
   end
 
   def self.calc_summary_for_all
