@@ -12,7 +12,7 @@ ActiveAdmin.register Ticket do
 #   permitted
 # end
 
-permit_params :count, :b_name, :furigana, :b_mail, :comment, :user_id, :stage_id, :type_id, :comment2, users_attributes: [:name], stages_attributes: [:performance], types_attributes: [:kind]
+permit_params :count, :b_name, :furigana, :b_mail, :comment, :user_id, :stage_id, :type_id, :payment_method_id, :comment2, users_attributes: [:name], stages_attributes: [:performance], types_attributes: [:kind]
 
 
 index do
@@ -27,6 +27,9 @@ index do
     column Type.human_attribute_name(:kind) do |t|
       t.type.kind
     end
+    column PaymentMethod.human_attribute_name(:name) do |t|
+      t.payment_method.name
+    end
     column :count
     column :furigana
     column :b_name
@@ -39,6 +42,7 @@ index do
     filter :user_name, label: User.human_attribute_name(:name), as: :select, collection: User.pluck(:name)
     filter :stage_performance, label: Stage.human_attribute_name(:performance), as: :select, collection: Stage.pluck(:performance)
     filter :type_kind, label: Type.human_attribute_name(:kind), as: :select, collection: Type.pluck(:kind)
+    filter :payment_method_name, label: PaymentMethod.human_attribute_name(:name), as: :select, collection: PaymentMethod.pluck(:name)
     filter :furigana
     # filter :count コメント化しました(2019/1/22)
     filter :b_name
@@ -60,6 +64,7 @@ index do
         f.input :stage_id, as: :select, collection: Stage.performance_order.on_sale.pluck(:performance, :id).to_h
       end
       f.input :type_id, as: :select, collection: Type.pluck(:kind, :id).to_h
+      f.input :payment_method_id, as: :select, collection: PaymentMethod.pluck(:name, :id).to_h
       f.input :count
       f.input :furigana
       f.input :b_name
@@ -105,6 +110,9 @@ index do
       end
       row :type_id do |t|
         t.type.kind
+      end
+      row :payment_method_id do |t|
+        t.payment_method.name
       end
       row :count
       row :furigana

@@ -12,7 +12,7 @@ ActiveAdmin.register PaymentMethod do
   #   permitted
   # end
 
-  permit_params :name, :discount_rate
+  permit_params :name, :discount_rate, :nickname
 
   index do
     selectable_column

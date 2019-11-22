@@ -36,7 +36,7 @@ ja:
       user: 取扱者
       stage: 公演
       type: チケット種別
-      payment_method: 支払い方法
+      payment_method: 支払方法
     attributes:
       user:
         name: 取扱者名
@@ -73,8 +73,8 @@ ja:
         stage_and_type: 公演とチケット種別の組み合わせ
         comment: ひとこと
       payment_method:
-        name: 支払い方法
-        nickname: 省略名（支払い方法）
+        name: 支払方法
+        nickname: 省略名（支払方法）
         discount_rate: 割引率
 
   access_denined: 許可されていない操作が実行されました。

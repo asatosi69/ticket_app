@@ -3,10 +3,12 @@ class Register < ApplicationRecord
   belongs_to :ticket, optional: true
   belongs_to :stage
   belongs_to :type
+  belongs_to :payment_method
   enum state: { init: 0, confirmed: 10 }
 
   validates :stage_id, presence: true
   validates :type_id, presence: true
+  validates :payment_method_id, presence: true
   validates :count, numericality: { greater_than: 0 }
   validates :b_name, presence: true
   validates :furigana, presence: true
@@ -21,6 +23,7 @@ class Register < ApplicationRecord
       user_id: user_id,
       stage_id: stage_id,
       type_id: type_id,
+      payment_method_id: PaymentMethod.find_by(name: Rails.application.config.default_payment_method_name),
       count: count,
       b_name: b_name,
       furigana: furigana,

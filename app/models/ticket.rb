@@ -22,10 +22,12 @@ class Ticket < ApplicationRecord
   accepts_nested_attributes_for :stage
   belongs_to :type
   accepts_nested_attributes_for :type
+  belongs_to :payment_method
 
   validates :user_id, presence: true #この行を追加しました(2019/1/22)
   validates :stage_id, presence: true #この行を追加しました(2019/1/22)
   validates :type_id, presence: true #この行を追加しました(2019/1/22)
+  validates :payment_method_id, presence: true
   validates :count, numericality: { greater_than: 0 } #この行を追加しました(2019/1/22)
   validates :b_name, presence: true #この行を追加しました(2019/1/22)
   validates :furigana, presence: true
@@ -40,7 +42,7 @@ class Ticket < ApplicationRecord
   validate :check_conbitation_of_type_and_stage, unless: -> { validation_context == :admin }
 
   def self.sumup_all_ticket_price
-    joins(:type).pluck(:count, :price).map { |count, price| count * price }.sum
+    joins(:type).joins(:payment_method).pluck(:count, :price, :discount_rate).map { |count, price, discount_rate| (count * price * ((100-discount_rate)/100.to_f)).to_i}.sum
   end
 
   def self.calc_summary_for_all

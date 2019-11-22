@@ -34,7 +34,7 @@ class Stage < ApplicationRecord
   end
 
   def sumup_ticket_price
-    tickets.joins(:type).pluck(:count, :price).map { |count, price| count * price }.sum
+    tickets.joins(:type).joins(:payment_method).pluck(:count, :price, :discount_rate).map { |count, price, discount_rate| (count * price * ((100-discount_rate)/100.to_f)).to_i}.sum
   end
 
   def sumup_ticket_seat
