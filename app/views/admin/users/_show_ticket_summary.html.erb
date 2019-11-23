@@ -17,26 +17,26 @@
 <table class='index_table' id='summary_table'>
   <th></th>
   <% Stage.performance_order.each do |stage| %>
-    <th><%= stage.performance %></th>
+    <th class="col"><%= stage.performance %></th>
   <% end %>
-  <th>集計</th>
+  <th class="col">集計</th>
   <tr id="summary_line"></tr>
   </tr>
-    <th>金額</th>
+    <th class="col">金額</th>
     <% Stage.performance_order.each do |stage| %>
       <td><%= stage.sumup_ticket_price %></td>
     <% end %>
     <td><%= Ticket.sumup_all_ticket_price %></td>
   </tr>
   <tr>
-    <th>座席</th>
+    <th class="col">座席</th>
       <% @stages.each do |stage| %>
         <td><%= stage.total %></td>
       <% end %>
       <td><%= @sum_of_stage_total%></td>
   </tr>
   <tr>
-    <th>販売済</th>
+    <th class="col">販売済</th>
     <% total = 0 %>
     <% @stage_ticket_seats_info.each do |ticket_seats_info| %>
       <td>
@@ -54,7 +54,7 @@
     </td>
   </tr>
   <tr>
-    <th>充足率</th>
+    <th class="col">充足率</th>
     <% @stages.each do |stage| %>
       <td><%= stage.calc_adequacy_ratio.to_i %></td>
     <% end %>
