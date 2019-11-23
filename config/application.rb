@@ -21,6 +21,7 @@ module TicketApp
     config.troupe_name = '三角'.freeze
     config.performance_name = 'おにぎり'.freeze
     config.performance_url = 'www.onigiri.com'.freeze
+    config.performance_notice = '『お客様へのお願い』<br>・劇場の開場時間は公演開演時間の30分前となります。'
     config.troupe_url = 'www.sankaku.com'.freeze
 
     config.default_payment_method_name = '当日精算'
