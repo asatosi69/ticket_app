@@ -22,12 +22,16 @@
   <th class="col">集計</th>
   <tr id="summary_line"></tr>
   </tr>
-    <th class="col">金額</th>
-    <% Stage.performance_order.each do |stage| %>
-      <td><%= stage.sumup_ticket_price %></td>
-    <% end %>
-    <td><%= Ticket.sumup_all_ticket_price %></td>
-  </tr>
+  <% if current_user.admin? %>
+    <tr>
+      <th class="col">金額</th>
+      <% Stage.performance_order.each do |stage| %>
+        <td><%= stage.sumup_ticket_price %></td>
+      <% end %>
+      <td><%= Ticket.sumup_all_ticket_price %></td>
+    </tr>
+  <% end %>
+  <tr><td colspan="<%= Stage.performance_order.size + 2%>"td></tr>
   <tr>
     <th class="col">座席</th>
       <% @stages.each do |stage| %>
@@ -53,13 +57,16 @@
       <% end %>
     </td>
   </tr>
-  <tr>
-    <th class="col">充足率</th>
-    <% @stages.each do |stage| %>
-      <td><%= stage.calc_adequacy_ratio.to_i %></td>
-    <% end %>
-    <td><%= ((@sum_of_stage_ticket_seats[:total_seats_count].to_f / @sum_of_stage_total.to_f) * 100).to_i %></td>
-  </tr>
+  <% if current_user.admin? %>
+    <tr><td colspan="<%= Stage.performance_order.size + 2%>"></td></tr>
+    <tr>
+      <th class="col">充足率</th>
+      <% @stages.each do |stage| %>
+        <td><%= stage.calc_adequacy_ratio.to_i %></td>
+      <% end %>
+      <td><%= ((@sum_of_stage_ticket_seats[:total_seats_count].to_f / @sum_of_stage_total.to_f) * 100).to_i %></td>
+    </tr>
+  <% end %>
 </table>
 <script>
   var current_user_id = $('#js-current_user_id').data('current_user_id');
