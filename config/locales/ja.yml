@@ -74,7 +74,7 @@ ja:
         comment: ひとこと
       payment_method:
         name: 支払方法
-        nickname: 省略名（支払方法）
+        nickname: 短縮名
         discount_rate: 割引率
 
   access_denined: 許可されていない操作が実行されました。
