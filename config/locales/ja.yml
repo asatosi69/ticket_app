@@ -42,8 +42,10 @@ ja:
         name: 取扱者名
         email: 取扱者Eメール
         admin: 管理者フラグ #この行追加しました(2019/1/22)
+        password: パスワード
+        password_confirmation: パスワード（確認用）
       stage:
-        performance: 公演名
+        performance: 開演日時
         total: 総座席数 #この行追加しました(2019/1/22)
         deadline: 公演毎の受付終了時間 #この行追加しました(2019/1/22)
         end_flag: 販売終了フラグ #この行追加しました(2019/1/22)
@@ -74,7 +76,7 @@ ja:
         comment: ひとこと
       payment_method:
         name: 支払方法
-        nickname: 省略名（支払方法）
+        nickname: 短縮名
         discount_rate: 割引率
 
   access_denined: 許可されていない操作が実行されました。
