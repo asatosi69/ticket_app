@@ -42,6 +42,8 @@ ja:
         name: 取扱者名
         email: 取扱者Eメール
         admin: 管理者フラグ #この行追加しました(2019/1/22)
+        password: パスワード
+        password_confirmation: パスワード（確認用）
       stage:
         performance: 開演日時
         total: 総座席数 #この行追加しました(2019/1/22)
