@@ -7,10 +7,10 @@
 ☑がついている項目は、一般取扱者はチケットの操作ができません。
 一般取扱者が操作をするためには、☑を□にしてください。
 </p>
-<table class='index_table' id='summary_table' style="text-align: center">
+<table class='index_table' id='summary_table'>
   <th></th>
   <% Type.kind_order.each do |type| %>
-    <th><%= type.kind %></th>
+    <th class="col"><%= type.kind %></th>
   <% end %>
   <% Stage.includes(:links).performance_order.each do |stage| %>
     <tr>
