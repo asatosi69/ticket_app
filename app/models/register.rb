@@ -8,7 +8,6 @@ class Register < ApplicationRecord
 
   validates :stage_id, presence: true
   validates :type_id, presence: true
-  validates :payment_method_id, presence: true
   validates :count, numericality: { greater_than: 0 }
   validates :b_name, presence: true
   validates :furigana, presence: true
