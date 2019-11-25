@@ -1,3 +1,8 @@
+<style>
+table, th, td {
+  width: auto !important;
+}
+</style>
 <div id='js-current_user_id' data-current_user_id='<%= current_user.id %>'></div>
 チケット枚数の見方（凡例）
 <p>
@@ -24,14 +29,25 @@
   </tr>
   <% if current_user.admin? %>
     <tr>
-      <th class="col">金額</th>
-      <% Stage.performance_order.each do |stage| %>
-        <td><%= stage.sumup_ticket_price %></td>
+      <th class="col">販売済</th>
+      <% total = 0 %>
+      <% @stage_ticket_seats_info.each do |ticket_seats_info| %>
+        <td>
+          <%= ticket_seats_info[:total_seats_count] %>
+          <% ticket_seats_info[:counts_by_type].each do |count_by_type| %>
+            <span style='color: <%= count_by_type[:color_code] %>;'>(<%= count_by_type[:count] %>)</span>
+          <% end %>
+        </td>
       <% end %>
-      <td><%= Ticket.sumup_all_ticket_price %></td>
+      <td>
+        <%= @sum_of_stage_ticket_seats[:total_seats_count] %>
+        <% @sum_of_stage_ticket_seats[:count_by_type_summary].each do |_type_id, summary| %>
+          <span style='color: <%= summary[:color_code] %>;'>(<%= summary[:count] %>)</span>
+        <% end %>
+      </td>
     </tr>
   <% end %>
-  <tr><td colspan="<%= Stage.performance_order.size + 2%>"td></tr>
+  <tr><td colspan="<%= Stage.performance_order.size + 2%>"></td></tr>
   <tr>
     <th class="col">座席</th>
       <% @stages.each do |stage| %>
@@ -40,31 +56,20 @@
       <td><%= @sum_of_stage_total%></td>
   </tr>
   <tr>
-    <th class="col">販売済</th>
-    <% total = 0 %>
-    <% @stage_ticket_seats_info.each do |ticket_seats_info| %>
-      <td>
-        <%= ticket_seats_info[:total_seats_count] %>
-        <% ticket_seats_info[:counts_by_type].each do |count_by_type| %>
-          <span style='color: <%= count_by_type[:color_code] %>;'>(<%= count_by_type[:count] %>)</span>
-        <% end %>
-      </td>
+    <th class="col">充足率</th>
+    <% @stages.each do |stage| %>
+      <td><%= stage.calc_adequacy_ratio.to_i %></td>
     <% end %>
-    <td>
-      <%= @sum_of_stage_ticket_seats[:total_seats_count] %>
-      <% @sum_of_stage_ticket_seats[:count_by_type_summary].each do |_type_id, summary| %>
-        <span style='color: <%= summary[:color_code] %>;'>(<%= summary[:count] %>)</span>
-      <% end %>
-    </td>
+    <td><%= ((@sum_of_stage_ticket_seats[:total_seats_count].to_f / @sum_of_stage_total.to_f) * 100).to_i %></td>
   </tr>
   <% if current_user.admin? %>
-    <tr><td colspan="<%= Stage.performance_order.size + 2%>"></td></tr>
+    <tr><td colspan="<%= Stage.performance_order.size + 2%>"td></tr>
     <tr>
-      <th class="col">充足率</th>
-      <% @stages.each do |stage| %>
-        <td><%= stage.calc_adequacy_ratio.to_i %></td>
+      <th class="col">金額</th>
+      <% Stage.performance_order.each do |stage| %>
+        <td><%= stage.sumup_ticket_price %></td>
       <% end %>
-      <td><%= ((@sum_of_stage_ticket_seats[:total_seats_count].to_f / @sum_of_stage_total.to_f) * 100).to_i %></td>
+      <td><%= Ticket.sumup_all_ticket_price %></td>
     </tr>
   <% end %>
 </table>
@@ -83,7 +88,7 @@
     datas.forEach( (data) => {
       var row_id = 'table_row_' + data.user_id
       $("#summary_line").before($("<tr id='" + row_id + "'></tr>"));
-      $('#' + row_id).append($("<td></td>").text(data.user_name));
+      $('#' + row_id).append($("<th class='col'></th>").text(data.user_name));
       data.counts_by_stage.forEach( (val) => {
         var content = val.total_seats_count;
         val.counts_by_type.forEach( (count_by_type) => {
