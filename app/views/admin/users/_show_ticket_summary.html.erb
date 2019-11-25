@@ -39,34 +39,34 @@
       <% end %>
       <td><%= @sum_of_stage_total%></td>
   </tr>
-  <tr>
-    <th class="col">販売済</th>
-    <% total = 0 %>
-    <% @stage_ticket_seats_info.each do |ticket_seats_info| %>
+  <% if current_user.admin? %>
+    <tr>
+      <th class="col">販売済</th>
+      <% total = 0 %>
+      <% @stage_ticket_seats_info.each do |ticket_seats_info| %>
+        <td>
+          <%= ticket_seats_info[:total_seats_count] %>
+          <% ticket_seats_info[:counts_by_type].each do |count_by_type| %>
+            <span style='color: <%= count_by_type[:color_code] %>;'>(<%= count_by_type[:count] %>)</span>
+          <% end %>
+        </td>
+      <% end %>
       <td>
-        <%= ticket_seats_info[:total_seats_count] %>
-        <% ticket_seats_info[:counts_by_type].each do |count_by_type| %>
-          <span style='color: <%= count_by_type[:color_code] %>;'>(<%= count_by_type[:count] %>)</span>
+        <%= @sum_of_stage_ticket_seats[:total_seats_count] %>
+        <% @sum_of_stage_ticket_seats[:count_by_type_summary].each do |_type_id, summary| %>
+          <span style='color: <%= summary[:color_code] %>;'>(<%= summary[:count] %>)</span>
         <% end %>
       </td>
-    <% end %>
-    <td>
-      <%= @sum_of_stage_ticket_seats[:total_seats_count] %>
-      <% @sum_of_stage_ticket_seats[:count_by_type_summary].each do |_type_id, summary| %>
-        <span style='color: <%= summary[:color_code] %>;'>(<%= summary[:count] %>)</span>
-      <% end %>
-    </td>
-  </tr>
-  <% if current_user.admin? %>
-    <tr><td colspan="<%= Stage.performance_order.size + 2%>"></td></tr>
-    <tr>
-      <th class="col">充足率</th>
-      <% @stages.each do |stage| %>
-        <td><%= stage.calc_adequacy_ratio.to_i %></td>
-      <% end %>
-      <td><%= ((@sum_of_stage_ticket_seats[:total_seats_count].to_f / @sum_of_stage_total.to_f) * 100).to_i %></td>
     </tr>
   <% end %>
+  <tr><td colspan="<%= Stage.performance_order.size + 2%>"></td></tr>
+  <tr>
+    <th class="col">充足率</th>
+    <% @stages.each do |stage| %>
+      <td><%= stage.calc_adequacy_ratio.to_i %></td>
+    <% end %>
+    <td><%= ((@sum_of_stage_ticket_seats[:total_seats_count].to_f / @sum_of_stage_total.to_f) * 100).to_i %></td>
+  </tr>
 </table>
 <script>
   var current_user_id = $('#js-current_user_id').data('current_user_id');
