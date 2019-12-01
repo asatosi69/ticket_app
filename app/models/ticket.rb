@@ -32,9 +32,9 @@ class Ticket < ApplicationRecord
   validates :b_name, presence: true #この行を追加しました(2019/1/22)
   validates :furigana, presence: true
 
-  after_create :notice_mail_for_create_ticket
-  after_update :notice_mail_for_update_ticket
-  after_destroy :notice_mail_for_destroy_ticket
+  after_create :notice_mail_for_create_ticket, if: :need_notify?
+  after_update :notice_mail_for_update_ticket, if: :need_notify?
+  after_destroy :notice_mail_for_destroy_ticket, if: :need_notify?
   after_commit :calc_stage_end_flag
 
   validate :check_furigana_is_zenkaku_kana
@@ -151,6 +151,13 @@ class Ticket < ApplicationRecord
   private_class_method :calc_summary_for_stage_and_user
 
   private
+
+  def need_notify?
+    payment_method_id ==
+      PaymentMethod.find_by(
+        name: Rails.application.config.default_payment_method_name
+      ).id
+  end
 
   def calc_stage_end_flag
     stage.calc_end_flag!
