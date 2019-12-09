@@ -58,6 +58,20 @@ GEM
     arbre (1.2.0)
       activesupport (>= 3.0.0)
     arel (8.0.0)
+    aws-eventstream (1.0.1)
+    aws-partitions (1.126.0)
+    aws-sdk-core (3.44.1)
+      aws-eventstream (~> 1.0)
+      aws-partitions (~> 1.0)
+      aws-sigv4 (~> 1.0)
+      jmespath (~> 1.0)
+    aws-sdk-rails (2.1.0)
+      aws-sdk-ses (~> 1)
+      railties (>= 3)
+    aws-sdk-ses (1.14.0)
+      aws-sdk-core (~> 3, >= 3.39.0)
+      aws-sigv4 (~> 1.0)
+    aws-sigv4 (1.0.3)
     bcrypt (3.1.12)
     bindex (0.6.0)
     builder (3.2.3)
@@ -108,6 +122,7 @@ GEM
     jbuilder (2.8.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
+    jmespath (1.4.0)
     jquery-rails (4.3.3)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -253,6 +268,7 @@ DEPENDENCIES
   actionview (>= 5.1.6.2)
   activeadmin
   annotate
+  aws-sdk-rails
   byebug
   cancancan
   capybara (~> 2.13)
