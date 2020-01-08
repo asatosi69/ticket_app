@@ -20,6 +20,16 @@ test:
   <<: *default
   database: db/test.sqlite3
 
+# CREATE USER 'ticket_app'@'%' IDENTIFIED BY 'パスワードは適宜設定をお願いします';
+# CREATE DATABASE IF NOT EXISTS `ticket_app` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`;
+# GRANT SELECT, LOCK TABLES, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, REFERENCES ON `ticket_app`.* TO 'ticket_app'@'%';
 production:
-  <<: *default
-  database: db/production.sqlite3
+  timeout: 5000
+  adapter: mysql2
+  encoding: utf8
+  reconnect: true
+  pool: <%= ENV.fetch("DATABASE_HOST") { 5 } %>
+  database: <%= ENV.fetch("DATABASE_DATABASE") { 'ticket_app' } %>
+  username: <%= ENV.fetch("DATABASE_USERNAME") { 'ticket_app' } %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD") { 'password' } %>
+  host: <%= ENV.fetch("DATABASE_HOST") { '127.0.0.1' } %>
