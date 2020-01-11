@@ -60,5 +60,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'rails-i18n'
 gem 'cancancan'
-gem 'mysql2', '~> 0.5.2'
+group :production do
+  gem 'mysql2', '~> 0.5.2'
+end
 gem 'aws-sdk-rails'
