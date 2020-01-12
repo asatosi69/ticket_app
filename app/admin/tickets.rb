@@ -40,7 +40,7 @@ index do
   end
 
     filter :user_name, label: User.human_attribute_name(:name), as: :select, collection: User.pluck(:name)
-    filter :stage_performance, label: Stage.human_attribute_name(:performance), as: :select, collection: Stage.pluck(:performance)
+    filter :stage_performance, label: Stage.human_attribute_name(:performance), as: :select, collection: Stage.performance_order.pluck(:performance)
     filter :type_kind, label: Type.human_attribute_name(:kind), as: :select, collection: Type.pluck(:kind)
     filter :payment_method_name, label: PaymentMethod.human_attribute_name(:name), as: :select, collection: PaymentMethod.pluck(:name)
     filter :furigana
