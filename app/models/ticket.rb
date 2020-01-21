@@ -53,6 +53,30 @@ class Ticket < ApplicationRecord
     summary
   end
 
+  def self.calc_summary_for_all_by_payment_method
+    summary = []
+    PaymentMethod.all.each do |pm|
+      summary << calc_summary_for_payment_method(payment_method: pm)
+    end
+    summary
+  end
+
+  def self.calc_summary_for_payment_method(payment_method: nil)
+    summary_for_payment_method = SummaryForPaymentMethod.new
+    summary_for_payment_method.payment_method_id = payment_method.id
+    summary_for_payment_method.payment_name = payment_method.name
+    summary_counts_by_paymentmethod_and_stage = []
+    summary_total_seats = 0
+    Stage.performance_order.each do |s|
+      summary_count_by_paymentmethod_and_stage = calc_summary_for_stage_and_payment_method(stage: s, payment_method: payment_method)
+      summary_counts_by_paymentmethod_and_stage << summary_count_by_paymentmethod_and_stage 
+      summary_total_seats += summary_count_by_paymentmethod_and_stage.total_seats_count
+    end
+    summary_for_payment_method.summary_counts_by_paymentmethod_and_stage = summary_counts_by_paymentmethod_and_stage
+    summary_for_payment_method.total_counts = summary_total_seats
+    summary_for_payment_method
+  end
+
   def self.calc_summary_for_stage(stage)
     tickets = Ticket.where(stage_id: stage.id)
     counts_by_type = []
@@ -97,6 +121,20 @@ class Ticket < ApplicationRecord
     :count
   )
 
+  SummaryForPaymentMethod = Struct.new(
+    :payment_method_id,
+    :payment_name,
+    :total_counts,
+    :summary_counts_by_paymentmethod_and_stage
+  )
+
+  SummaryCountsByPaymentMethodAndStage = Struct.new(
+    :stage_id,
+    :stage_performance,
+    :total_seats_count,
+    :summary_counts_by_paymentmethod_and_stage_and_type # SummaryCountByTypeを設定する
+  )
+
   def self.calc_summary_for_user(user)
     summary = SummaryForUser.new
     summary.user_id = user.id
@@ -125,6 +163,28 @@ class Ticket < ApplicationRecord
     summary.counts_by_stage = counts_by_stage
     summary.summary_counts_by_type = summary_counts_by_type
     summary
+  end
+
+  def self.calc_summary_for_stage_and_payment_method(stage: nil, payment_method: payment_method)
+    tickets_filter_by_stage_and_payment_method = Ticket.where(stage_id: stage.id, payment_method_id: payment_method.id)
+    counts_by_type = []
+    Type.all.each do |t|
+      count_by_type = SummaryCountByType.new
+      count_by_type.type_id = t.id
+      count_by_type.type_name = t.kind
+      count_by_type.color_code = t.color.color_code
+      count_by_type.count = tickets_filter_by_stage_and_payment_method.where(type_id: t.id).pluck(:count).sum
+      counts_by_type << count_by_type
+    end
+    total_seats_count = tickets_filter_by_stage_and_payment_method.inject(0) do |sum, ticket|
+      sum + ticket.type.seat * ticket.count
+    end
+    summary_counts_by_payment_method_and_stage = SummaryCountsByPaymentMethodAndStage.new
+    summary_counts_by_payment_method_and_stage.stage_id = stage.id
+    summary_counts_by_payment_method_and_stage.stage_performance = stage.performance
+    summary_counts_by_payment_method_and_stage.total_seats_count = total_seats_count
+    summary_counts_by_payment_method_and_stage.summary_counts_by_paymentmethod_and_stage_and_type = counts_by_type
+    summary_counts_by_payment_method_and_stage
   end
 
   def self.calc_summary_for_stage_and_user(stage: nil, user: nil)

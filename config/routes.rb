@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get :ticket_summary, to: 'ticket_summary#user_summary'
     end
   end
+  get :ticket_summary_by_payment_method, to: 'ticket_summary#payment_summary'
 
   resources :links, only: %i[create destroy]
 
