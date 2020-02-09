@@ -14,4 +14,9 @@ class TicketSummaryController < ApplicationController
       end
     render json: summary_info
   end
+
+  # /ticket_summary_by_payment_method.json
+  def payment_summary
+    render json: Ticket.calc_summary_for_all_by_payment_method
+  end
 end
