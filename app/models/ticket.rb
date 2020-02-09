@@ -67,13 +67,25 @@ class Ticket < ApplicationRecord
     summary_for_payment_method.payment_name = payment_method.name
     summary_counts_by_paymentmethod_and_stage = []
     summary_total_seats = 0
+    summary_counts_by_paymentmethod_and_type = {}
     Stage.performance_order.each do |s|
       summary_count_by_paymentmethod_and_stage = calc_summary_for_stage_and_payment_method(stage: s, payment_method: payment_method)
-      summary_counts_by_paymentmethod_and_stage << summary_count_by_paymentmethod_and_stage 
+      summary_counts_by_paymentmethod_and_stage << summary_count_by_paymentmethod_and_stage
       summary_total_seats += summary_count_by_paymentmethod_and_stage.total_seats_count
+      summary_count_by_paymentmethod_and_stage[:summary_counts_by_paymentmethod_and_stage_and_type].each do |v|
+        if summary_counts_by_paymentmethod_and_type[:"#{v.type_id}"].blank?
+          summary_count_by_paymentmethod_and_type = SummaryCountByType.new
+          summary_count_by_paymentmethod_and_type.type_name = v.type_name
+          summary_count_by_paymentmethod_and_type.color_code = v.color_code
+          summary_count_by_paymentmethod_and_type.count = 0
+          summary_counts_by_paymentmethod_and_type[:"#{v.type_id}"] = summary_count_by_paymentmethod_and_type
+        end
+        summary_counts_by_paymentmethod_and_type[:"#{v.type_id}"].count += v.count
+      end
     end
     summary_for_payment_method.summary_counts_by_paymentmethod_and_stage = summary_counts_by_paymentmethod_and_stage
     summary_for_payment_method.total_counts = summary_total_seats
+    summary_for_payment_method.summary_counts_by_paymentmethod_and_type = summary_counts_by_paymentmethod_and_type
     summary_for_payment_method
   end
 
@@ -125,7 +137,8 @@ class Ticket < ApplicationRecord
     :payment_method_id,
     :payment_name,
     :total_counts,
-    :summary_counts_by_paymentmethod_and_stage
+    :summary_counts_by_paymentmethod_and_stage,
+    :summary_counts_by_paymentmethod_and_type,
   )
 
   SummaryCountsByPaymentMethodAndStage = Struct.new(

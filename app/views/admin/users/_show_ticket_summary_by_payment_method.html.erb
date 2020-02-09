@@ -1,0 +1,45 @@
+<table class='index_table' id='summary_table_by_payment_method'>
+  <th></th>
+  <% Stage.performance_order.each do |stage| %>
+    <th class="col"><%= stage.performance %></th>
+  <% end %>
+  <th class="col">集計</th>
+  <tr id="summary_line_by_payment_method"></tr>
+  </tr>
+  <tr><td colspan="<%= Stage.performance_order.size + 2%>"></td></tr>
+</table>
+<script>
+  var current_user_id = $('#js-current_user_id').data('current_user_id');
+  $.ajax({
+    url: '/ticket_summary_by_payment_method.json',
+    type: 'GET',
+    data:{
+    }
+  })
+  // Ajaxリクエストが成功した時発動
+  .done( (datas) => {
+    // $('.result').html(data);
+    console.log(datas);
+    datas.forEach( (data) => {
+      var row_id = 'table_row_payment_method_' + data.payment_method_id
+      $("#summary_line_by_payment_method").before($("<tr id='" + row_id + "'></tr>"));
+      $('#' + row_id).append($("<th class='col'></th>").text(data.payment_name));
+      data.summary_counts_by_paymentmethod_and_stage.forEach( (val) => {
+        var content = val.total_seats_count;
+        val.summary_counts_by_paymentmethod_and_stage_and_type.forEach( (counts_by_pamentmethod_and_stage_and_type) => {
+          content += '<span style="color: ' + counts_by_pamentmethod_and_stage_and_type.color_code + '";>(' + counts_by_pamentmethod_and_stage_and_type.count + ')</span>'
+        });
+
+        $('#' + row_id).append($("<td></td>").html(content));
+      });
+      var summary_count_by_type_html = ''
+      for (var summary_counts_by_paymentmethod_and_type in data.summary_counts_by_paymentmethod_and_type) {
+        item = data.summary_counts_by_paymentmethod_and_type[summary_counts_by_paymentmethod_and_type];
+        summary_count_by_type_html += '<span style="color: ' + item.color_code  + ';">(' + item.count  + ')</span>';
+      }
+      $('#' + row_id).append($("<td></td>").html(
+        data.total_counts + summary_count_by_type_html
+      ));
+    });
+  })
+</script>
