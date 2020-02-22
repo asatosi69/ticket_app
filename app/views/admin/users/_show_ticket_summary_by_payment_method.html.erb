@@ -1,12 +1,16 @@
 <table class='index_table' id='summary_table_by_payment_method'>
-  <th></th>
-  <% Stage.performance_order.each do |stage| %>
-    <th class="col"><%= stage.performance %></th>
-  <% end %>
-  <th class="col">集計</th>
-  <tr id="summary_line_by_payment_method"></tr>
-  </tr>
-  <tr><td colspan="<%= Stage.performance_order.size + 2%>"></td></tr>
+  <thead>
+    <th></th>
+    <% Stage.performance_order.each do |stage| %>
+      <th class="col"><%= stage.performance %></th>
+    <% end %>
+    <th class="col">集計</th>
+  </thead>
+  <tbody>
+    <tr id="summary_line_by_payment_method"></tr>
+    </tr>
+    <tr><td colspan="<%= Stage.performance_order.size + 2%>"></td></tr>
+  </tbody>
 </table>
 <script>
   var current_user_id = $('#js-current_user_id').data('current_user_id');

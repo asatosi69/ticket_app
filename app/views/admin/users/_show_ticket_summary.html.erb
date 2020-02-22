@@ -1,6 +1,9 @@
 <style>
-table, th, td {
-  width: auto !important;
+table.index_table {
+  width: auto;
+}
+.col {
+  width: 100px;
 }
 </style>
 <div id='js-current_user_id' data-current_user_id='<%= current_user.id %>'></div>
@@ -20,58 +23,62 @@ table, th, td {
 </p>
 上の例では、<%= sample_sum_of_seat %> 席埋まっており、内訳が「<% types.each do |t| %><span style="color: <%= t.color.color_code %>"><%= t.kind %>：1 </span><% end %>」であることをしめす
 <table class='index_table' id='summary_table'>
-  <th></th>
-  <% Stage.performance_order.each do |stage| %>
-    <th class="col"><%= stage.performance %></th>
-  <% end %>
-  <th class="col">集計</th>
-  <tr id="summary_line"></tr>
-  </tr>
-  <% if current_user.admin? %>
-    <tr>
-      <th class="col">販売済</th>
-      <% total = 0 %>
-      <% @stage_ticket_seats_info.each do |ticket_seats_info| %>
+  <thead>
+    <th></th>
+    <% Stage.performance_order.each do |stage| %>
+      <th class="col"><%= stage.performance %></th>
+    <% end %>
+    <th class="col">集計</th>
+  </thead>
+  <tbody>
+    <tr id="summary_line"></tr>
+    </tr>
+    <% if current_user.admin? %>
+      <tr>
+        <th class="col">販売済</th>
+        <% total = 0 %>
+        <% @stage_ticket_seats_info.each do |ticket_seats_info| %>
+          <td>
+            <%= ticket_seats_info[:total_seats_count] %>
+            <% ticket_seats_info[:counts_by_type].each do |count_by_type| %>
+              <span style='color: <%= count_by_type[:color_code] %>;'>(<%= count_by_type[:count] %>)</span>
+            <% end %>
+          </td>
+        <% end %>
         <td>
-          <%= ticket_seats_info[:total_seats_count] %>
-          <% ticket_seats_info[:counts_by_type].each do |count_by_type| %>
-            <span style='color: <%= count_by_type[:color_code] %>;'>(<%= count_by_type[:count] %>)</span>
+          <%= @sum_of_stage_ticket_seats[:total_seats_count] %>
+          <% @sum_of_stage_ticket_seats[:count_by_type_summary].each do |_type_id, summary| %>
+            <span style='color: <%= summary[:color_code] %>;'>(<%= summary[:count] %>)</span>
           <% end %>
         </td>
-      <% end %>
-      <td>
-        <%= @sum_of_stage_ticket_seats[:total_seats_count] %>
-        <% @sum_of_stage_ticket_seats[:count_by_type_summary].each do |_type_id, summary| %>
-          <span style='color: <%= summary[:color_code] %>;'>(<%= summary[:count] %>)</span>
-        <% end %>
-      </td>
-    </tr>
-  <% end %>
-  <tr><td colspan="<%= Stage.performance_order.size + 2%>"></td></tr>
-  <tr>
-    <th class="col">座席</th>
-      <% @stages.each do |stage| %>
-        <td><%= stage.total %></td>
-      <% end %>
-      <td><%= @sum_of_stage_total%></td>
-  </tr>
-  <tr>
-    <th class="col">充足率</th>
-    <% @stages.each do |stage| %>
-      <td><%= stage.calc_adequacy_ratio.to_i %></td>
+      </tr>
     <% end %>
-    <td><%= ((@sum_of_stage_ticket_seats[:total_seats_count].to_f / @sum_of_stage_total.to_f) * 100).to_i %></td>
-  </tr>
-  <% if current_user.admin? %>
-    <tr><td colspan="<%= Stage.performance_order.size + 2%>"td></tr>
+    <tr><td colspan="<%= Stage.performance_order.size + 2%>"></td></tr>
     <tr>
-      <th class="col">金額</th>
-      <% Stage.performance_order.each do |stage| %>
-        <td><%= stage.sumup_ticket_price %></td>
-      <% end %>
-      <td><%= Ticket.sumup_all_ticket_price %></td>
+      <th class="col">座席</th>
+        <% @stages.each do |stage| %>
+          <td><%= stage.total %></td>
+        <% end %>
+        <td><%= @sum_of_stage_total%></td>
     </tr>
-  <% end %>
+    <tr>
+      <th class="col">充足率</th>
+      <% @stages.each do |stage| %>
+        <td><%= stage.calc_adequacy_ratio.to_i %></td>
+      <% end %>
+      <td><%= ((@sum_of_stage_ticket_seats[:total_seats_count].to_f / @sum_of_stage_total.to_f) * 100).to_i %></td>
+    </tr>
+    <% if current_user.admin? %>
+      <tr><td colspan="<%= Stage.performance_order.size + 2%>"td></tr>
+      <tr>
+        <th class="col">金額</th>
+        <% Stage.performance_order.each do |stage| %>
+          <td><%= stage.sumup_ticket_price %></td>
+        <% end %>
+        <td><%= Ticket.sumup_all_ticket_price %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 <script>
   var current_user_id = $('#js-current_user_id').data('current_user_id');
