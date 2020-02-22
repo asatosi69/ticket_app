@@ -64,9 +64,9 @@ table.index_table {
     <tr>
       <th class="col">充足率</th>
       <% @stages.each do |stage| %>
-        <td><%= stage.calc_adequacy_ratio.to_i %></td>
+        <td><%= stage.calc_adequacy_ratio.to_i %>%</td>
       <% end %>
-      <td><%= ((@sum_of_stage_ticket_seats[:total_seats_count].to_f / @sum_of_stage_total.to_f) * 100).to_i %></td>
+      <td><%= ((@sum_of_stage_ticket_seats[:total_seats_count].to_f / @sum_of_stage_total.to_f) * 100).to_i %>%</td>
     </tr>
     <% if current_user.admin? %>
       <tr><td colspan="<%= Stage.performance_order.size + 2%>"td></tr>
