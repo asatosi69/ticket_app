@@ -1,5 +1,11 @@
 <h1 class="text-center">
   <%= "『#{Rails.application.config.performance_name} 』『#{@register.user.name}』 専用チケットページ" %>
 </h1>
+<div class="text-center my-3">
+  <%= link_to "＜公演情報＞", Rails.application.config.performance_url %>
+</div>
+<div style = "color: red">
+  <%= Rails.application.config.performance_notice.html_safe %>
+</div>
 
 <%= render 'form', register: @register %>
