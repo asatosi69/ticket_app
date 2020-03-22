@@ -15,14 +15,6 @@ class ApplicationController < ActionController::Base
     admin_root_path
   end
 
-  protected
-
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :admin])
-    end
-
-  private
-
   def render_404
     if current_user.present?
       redirect_to admin_root_path and return
@@ -30,4 +22,10 @@ class ApplicationController < ActionController::Base
       redirect_to 'https://www.google.co.jp' and return
     end
   end
+
+  protected
+
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :admin])
+    end
 end

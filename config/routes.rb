@@ -22,4 +22,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   #
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
+
+  # NOTE: 以下は、存在しないURL(id部分を変更したときのURL直接実行を想定)時のリダイレクト処理
+  match ':any', to: 'application#render_404', via: [:get]
+  match 'admin/:any', to: 'application#render_404', via: [:get]
 end
