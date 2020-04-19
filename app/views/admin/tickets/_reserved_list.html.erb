@@ -1,0 +1,18 @@
+<%= @stage.performance %>の予約一覧
+<%= Date.current.strftime('%Y年%m月%d日 %H時%M分') %>
+<table class='index_table'>
+  <thead>
+    <th>
+      フリガナ
+    </th>
+  </thead>
+  <tbody>
+    <% @tickets.each do |ticket| %>
+      <tr>
+        <td>
+          <%= ticket.furigana %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

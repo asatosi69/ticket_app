@@ -126,4 +126,21 @@ index do
     @page_title = "公演とチケット種別の組み合わせ"
     render '_edit_ticket_links'
   end
+  collection_action :reserved_search, method: :get do
+    @page_title = '予約一覧出力'
+    render '_reserved_search'
+  end
+  collection_action :reserved_list, method: :get do
+    @page_title = '予約一覧別ウィンドウ'
+    search_condition = Ticket.joins(:user).where(stage_id: params[:stage_id])
+    search_condition =
+      if params['target_order'] == 'order_by_user_id_and_furigana'
+        search_condition.order(user_id: :desc).order(furigana: :desc)
+      else
+        search_condition.order(furigana: :desc)
+      end
+    @stage = Stage.find_by(id: params[:stage_id])
+    @tickets = search_condition
+    render '_reserved_list'
+  end
 end
