@@ -2,16 +2,24 @@
 <%= Date.current.strftime('%Y年%m月%d日 %H時%M分') %>
 <table class='index_table'>
   <thead>
-    <th>
-      フリガナ
-    </th>
+    <th><%= Ticket.human_attribute_name :furigana %></th>
+    <th><%= Ticket.human_attribute_name :b_name %></th>
+    <th><%= Ticket.human_attribute_name :type_id %></th>
+    <th><%= Ticket.human_attribute_name :count %></th>
+    <th><%= Ticket.human_attribute_name :payment_method_id %></th>
+    <th><%= Ticket.human_attribute_name :user %></th>
+    <th><%= Ticket.human_attribute_name :comment2 %></th>
   </thead>
   <tbody>
     <% @tickets.each do |ticket| %>
       <tr>
-        <td>
-          <%= ticket.furigana %>
-        </td>
+        <td><%= ticket.furigana %></td>
+        <td><%= ticket.b_name %></td>
+        <td><%= ticket.type.kind %></td>
+        <td><%= ticket.count %></td>
+        <td><%= ticket.payment_method.name %></td>
+        <td><%= ticket.user.name %></td>
+        <td><%= ticket.comment2 %></td>
       </tr>
     <% end %>
   </tbody>
