@@ -219,6 +219,7 @@ ActiveAdmin.setup do |config|
     admin.build_menu do |menu|
       menu.add label: '集計', url: '/admin/users/show_ticket_summary', html_options: { }, priority: 1
       menu.add label: '公演とチケット種別の組み合わせ', url: '/admin/tickets/edit_ticket_links', html_options: { }, priority: 2, if: proc { current_user.admin? }
+      menu.add label: '予約一覧出力', url: '/admin/tickets/reserved_search', html_options: { }, priority: 2, if: proc { current_user.admin? }
     end
   end
   #

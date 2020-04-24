@@ -67,6 +67,7 @@ ja:
         type_id: チケット種別
         user_name: 取扱者名
         payment_method_id: 支払方法
+        user: 取扱者
       register:
         count: チケット枚数
         b_name: お客様のお名前
