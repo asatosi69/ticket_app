@@ -135,7 +135,7 @@ index do
     search_condition = Ticket.joins(:user).where(stage_id: params[:stage_id])
     search_condition =
       if params['target_order'] == 'order_by_user_id_and_furigana'
-        search_condition.order(user_id: :asc).order(furigana: :asc)
+        search_condition.order('users.name asc').order(furigana: :asc)
       else
         search_condition.order(furigana: :asc)
       end
