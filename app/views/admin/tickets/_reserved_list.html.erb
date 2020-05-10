@@ -22,7 +22,7 @@
         <td><%= ticket.count %></td>
         <td><%= ticket.payment_method.name %></td>
         <td><%= ticket.user.name %></td>
-        <td><%= ticket.comment2 %></td>
+        <td><%= ticket.comment2.truncate(18) %></td>
       </tr>
     <% end %>
   </tbody>
