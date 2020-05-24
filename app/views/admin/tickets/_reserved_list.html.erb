@@ -16,12 +16,12 @@
   <tbody>
     <% @tickets.each do |ticket| %>
       <tr>
-        <td><%= ticket.furigana %></td>
-        <td><%= ticket.b_name %></td>
+        <td><%= ticket.furigana&.slice(0...8) %></td>
+        <td><%= ticket.b_name&.slice(0...8) %></td>
         <td><%= ticket.type.kind %></td>
         <td><%= ticket.count %></td>
         <td><%= ticket.payment_method.name %></td>
-        <td><%= ticket.user.name %></td>
+        <td><%= ticket.user.name&.slice(0...6) %></td>
         <td><%= ticket.comment2&.truncate(18) %></td>
       </tr>
     <% end %>
