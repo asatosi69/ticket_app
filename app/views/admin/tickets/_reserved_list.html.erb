@@ -4,7 +4,7 @@
 <%= @stage.performance %>の予約一覧
 <%= Time.current.strftime('%Y年%m月%d日 %H時%M分') %>
 <table class='table table-striped table-bordered'>
-  <thead class="thead-light">
+  <thead class="thead-light text-center">
     <th><%= Ticket.human_attribute_name :furigana %></th>
     <th><%= Ticket.human_attribute_name :b_name %></th>
     <th><%= Ticket.human_attribute_name :type_id %></th>
