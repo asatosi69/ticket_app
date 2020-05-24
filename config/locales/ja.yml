@@ -56,7 +56,7 @@ ja:
         price: 料金 #この行追加しました(2019/1/22)
         color: 色
       ticket:
-        count: チケット枚数
+        count: 枚数
         b_name: お客様のお名前
         furigana: フリガナ
         b_mail: お客様のメールアドレス
