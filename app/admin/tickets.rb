@@ -158,6 +158,6 @@ index do
       end
     @stage = Stage.find_by(id: params[:stage_id])
     @tickets = search_condition
-    render '_reserved_list_for_half'
+    render '_reserved_list_for_half', layout: false
   end
 end

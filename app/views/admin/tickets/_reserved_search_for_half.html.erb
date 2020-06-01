@@ -1,6 +1,6 @@
-<%= form_tag(reserved_list_admin_tickets_path, method: :get, target: '_blank') do %>
+<%= form_tag(reserved_list_for_half_admin_tickets_path, method: :get, target: '_blank') do %>
   <div>
-    <%= 
+    <%=
       select_tag 'stage_id', options_from_collection_for_select(Stage.performance_order, :id, :performance)
       #select_tag 'stage_id', options_from_collection_for_select(Stage.performance_order, :id, :performance), include_blank: '開演日時'
     %>
@@ -9,6 +9,6 @@
     <%= select_tag 'target_order', options_for_select({ 'フリガナ（昇順）': :order_by_furigana , '取扱者（昇順）⇒フリガナ（昇順）': :order_by_user_id_and_furigana })%>
   </div>
   <div>
-    <button>予約一覧出力</div>
+    <button>予約半券出力</div>
   </div>
 <% end %>
