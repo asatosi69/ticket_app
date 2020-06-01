@@ -12,3 +12,7 @@ $ ->
   if path.match(/\/admin\/tickets\/reserved_search/)
     $('.menu_item').removeClass('current')
     $('#予約一覧出力').addClass('current')
+
+  if path.match(/\/admin\/tickets\/reserved_search_for_half/)
+    $('.menu_item').removeClass('current')
+    $('#予約半券出力').addClass('current')

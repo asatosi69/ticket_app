@@ -143,4 +143,21 @@ index do
     @tickets = search_condition
     render '_reserved_list', layout: false
   end
+  collection_action :reserved_search_for_half, method: :get do
+    @page_title = '予約半券出力'
+    render '_reserved_search_for_half'
+  end
+  collection_action :reserved_list_for_half, method: :get do
+    @page_title = '予約半券出力ウィンドウ'
+    search_condition = Ticket.joins(:user).where(stage_id: params[:stage_id])
+    search_condition =
+      if params['target_order'] == 'order_by_user_id_and_furigana'
+        search_condition.order(user_id: :desc).order(furigana: :desc)
+      else
+        search_condition.order(furigana: :desc)
+      end
+    @stage = Stage.find_by(id: params[:stage_id])
+    @tickets = search_condition
+    render '_reserved_list_for_half', layout: false
+  end
 end
