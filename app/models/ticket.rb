@@ -223,6 +223,10 @@ class Ticket < ApplicationRecord
   end
   private_class_method :calc_summary_for_stage_and_user
 
+  def calc_price
+    (count * type.price * ((100-payment_method.discount_rate)/100.to_f)).to_i
+  end
+
   private
 
   def need_notify?

@@ -34,7 +34,7 @@
       <tr class="b-left b-bottom b-right">
         <td colspan="4" class="text-center"><%= ticket.payment_method.name %></td>
         <td colspan="4" class="text-center"><%= ticket.type.kind %></td>
-        <td colspan="4" class="text-center">XX円</td>
+        <td colspan="4" class="text-center"><%= ticket.calc_price %>円</td>
       </tr>
 
       <tr class="b-right b-bottom--thin ticket-card-table__title">
