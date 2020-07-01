@@ -2,7 +2,7 @@
 <%= stylesheet_link_tag 'print', media: "all" %>
 
 <%= @stage.performance %>の予約半券
-<div class="d-flex justify-content-around">
+<div class="d-flex flex-wrap flex-row justify-content-between">
   <% @tickets.each do |ticket| %>
     <table class="ticket-card-table">
       <tr class="b-bottom b-right">
