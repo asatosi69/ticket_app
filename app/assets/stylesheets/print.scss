@@ -22,6 +22,38 @@ body {
   page-break-inside: avoid;
 }
 
+.ticket-card-table {
+  width: 33%;
+  border: solid 1px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.ticket-card-table tr {
+  height: 1rem;
+}
+tr.b-bottom--thin td {
+  border-bottom: solid 1px #ccc;
+}
+td.b-bottom--thin {
+  border-bottom: solid 1px #ccc;
+}
+
+tr.b-bottom td {
+  border-bottom: solid 1px;
+}
+td.b-bottom {
+  border-bottom: solid 1px;
+}
+tr.b-left td {
+  border-left: solid 1px;
+}
+td.b-left {
+  border-left: solid 1px;
+}
+tr.b-right td {
+  border-right: solid 1px;
+}
+
 .ticket-card {
   width: 33%;
   height: 16%;

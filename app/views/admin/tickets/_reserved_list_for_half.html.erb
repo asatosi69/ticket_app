@@ -4,6 +4,60 @@
 <%= @stage.performance %>の予約半券
 <div class="d-flex justify-content-around">
   <% @tickets.each do |ticket| %>
+    <table class="ticket-card-table">
+      <tr class="b-bottom b-right">
+        <td colspan="8">フリガナ</td>
+        <td colspan="4" rowspan="2" class="text-center b-left">取扱者</td>
+      </tr>
+
+      <tr class="b-bottom">
+        <td colspan="8" class="text-center">フリガナ(値)</td>
+      </tr>
+
+      <tr class="b-bottom b-right">
+        <td colspan="8">名前</td>
+        <td colspan="4" rowspan="3" class="text-center b-left">取り扱い者の名前をここに</td>
+      </tr>
+
+      <tr class="b-bottom">
+        <td colspan="8" rowspan="2" class="text-center">お名前をここに</td>
+      </tr>
+
+      <tr> </tr>
+
+      <tr class="b-left b-right">
+        <td colspan="4" class="b-bottom--thin">支払方法</td>
+        <td colspan="4" class="b-bottom--thin">チケット種別</td>
+        <td colspan="4" class="b-bottom">XX枚</td>
+      </tr>
+
+      <tr class="b-left b-bottom b-right">
+        <td colspan="4">前売</td>
+        <td colspan="4">通常</td>
+        <td colspan="4">XX円</td>
+      </tr>
+
+      <tr class="b-right b-bottom--thin">
+        <td colspan="12" class="b-right">備考</td>
+      </tr>
+
+      <tr class="b-bottom b-right">
+        <td colspan="12" rowspan="2" class="text-center">備考本文</td>
+      </tr>
+
+      <tr></tr>
+
+      <tr class="b-right b-bottom--thin">
+        <td colspan="6">予約連番</td>
+        <td colspan="6">予約日</td>
+      </tr>
+
+      <tr class="b-bottom b-right">
+        <td colspan="6" class="text-center">予約連番の値</td>
+        <td colspan="6" class="text-center">予約日の値</td>
+      </tr>
+    </table>
+    <!--
     <div class="ticket-card">
       <div class="ticket-card-row-2">
         <div class="ticket-card-content-2-3">
@@ -80,5 +134,6 @@
         </div>
       </div>
     </div>
+    ,-->
   <% end %>
 </div>
