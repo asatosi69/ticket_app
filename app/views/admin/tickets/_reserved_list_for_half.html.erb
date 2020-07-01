@@ -6,8 +6,8 @@
   <% @tickets.each do |ticket| %>
     <table class="ticket-card-table">
       <tr class="b-bottom b-right">
-        <td colspan="8">フリガナ</td>
-        <td colspan="4" rowspan="2" class="text-center b-left">取扱者</td>
+        <td colspan="8" class="ticket-card-table__title ">フリガナ</td>
+        <td colspan="4" rowspan="2" class="text-center b-left ticket-card-table__title">取扱者</td>
       </tr>
 
       <tr class="b-bottom">
@@ -15,7 +15,7 @@
       </tr>
 
       <tr class="b-bottom b-right">
-        <td colspan="8">名前</td>
+        <td colspan="8" class="ticket-card-table__title">名前</td>
         <td colspan="4" rowspan="3" class="text-center b-left">取り扱い者の名前をここに</td>
       </tr>
 
@@ -26,8 +26,8 @@
       <tr> </tr>
 
       <tr class="b-left b-right">
-        <td colspan="4" class="b-bottom--thin">支払方法</td>
-        <td colspan="4" class="b-bottom--thin">チケット種別</td>
+        <td colspan="4" class="b-bottom--thin ticket-card-table__title">支払方法</td>
+        <td colspan="4" class="b-bottom--thin ticket-card-table__title">チケット種別</td>
         <td colspan="4" class="b-bottom">XX枚</td>
       </tr>
 
@@ -37,7 +37,7 @@
         <td colspan="4">XX円</td>
       </tr>
 
-      <tr class="b-right b-bottom--thin">
+      <tr class="b-right b-bottom--thin ticket-card-table__title">
         <td colspan="12" class="b-right">備考</td>
       </tr>
 
@@ -47,7 +47,7 @@
 
       <tr></tr>
 
-      <tr class="b-right b-bottom--thin">
+      <tr class="b-right b-bottom--thin ticket-card-table__title">
         <td colspan="6">予約連番</td>
         <td colspan="6">予約日</td>
       </tr>

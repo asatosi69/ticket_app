@@ -28,6 +28,9 @@ body {
   border-collapse: collapse;
   table-layout: fixed;
 }
+.ticket-card-table__title {
+  font-size: 0.7em;
+}
 .ticket-card-table tr {
   height: 1rem;
 }
