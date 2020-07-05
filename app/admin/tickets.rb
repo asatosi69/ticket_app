@@ -152,12 +152,16 @@ index do
     search_condition = Ticket.joins(:user).where(stage_id: params[:stage_id])
     search_condition =
       if params['target_order'] == 'order_by_user_id_and_furigana'
-        search_condition.order(user_id: :desc).order(furigana: :desc)
+        search_condition.order('users.name asc').order(furigana: :asc)
       else
-        search_condition.order(furigana: :desc)
+        search_condition.order(furigana: :asc)
       end
     @stage = Stage.find_by(id: params[:stage_id])
     @tickets = search_condition
+    @tickets = @tickets.to_a
+    while @tickets.size % (3 * 6) != 0
+      @tickets << Ticket.new
+    end
     render '_reserved_list_for_half', layout: false
   end
 end
