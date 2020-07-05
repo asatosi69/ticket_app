@@ -158,6 +158,10 @@ index do
       end
     @stage = Stage.find_by(id: params[:stage_id])
     @tickets = search_condition
+    @tickets = @tickets.to_a
+    while @tickets.size % (3 * 6) != 0
+      @tickets << Ticket.new
+    end
     render '_reserved_list_for_half', layout: false
   end
 end

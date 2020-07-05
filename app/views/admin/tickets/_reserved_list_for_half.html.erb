@@ -16,7 +16,7 @@
 
       <tr class="b-right">
         <td colspan="8" class="ticket-card-table__title">名前</td>
-        <td colspan="4" rowspan="3" class="text-center b-left"><%= ticket.user.name %></td>
+        <td colspan="4" rowspan="3" class="text-center b-left"><%= ticket&.user&.name %></td>
       </tr>
 
       <tr class="b-bottom">
@@ -32,9 +32,9 @@
       </tr>
 
       <tr class="b-left b-bottom b-right">
-        <td colspan="4" class="text-center"><%= ticket.payment_method.name %></td>
-        <td colspan="4" class="text-center"><%= ticket.type.kind %></td>
-        <td colspan="4" class="text-center"><%= ticket.calc_price %>円</td>
+        <td colspan="4" class="text-center"><%= ticket&.payment_method&.name %></td>
+        <td colspan="4" class="text-center"><%= ticket&.type&.kind %></td>
+        <td colspan="4" class="text-center"><%= ticket.calc_price if ticket.type.present? %>円</td>
       </tr>
 
       <tr class="b-right b-bottom--thin ticket-card-table__title">
@@ -54,7 +54,7 @@
 
       <tr class="b-bottom b-right">
         <td colspan="6" class="text-center"><%= ticket.id %></td>
-        <td colspan="6" class="text-center"><%= ticket.created_at.strftime('%Y年%m月%d日') %></td>
+        <td colspan="6" class="text-center"><%= ticket.created_at&.strftime('%Y年%m月%d日') %></td>
       </tr>
     </table>
     <!--
