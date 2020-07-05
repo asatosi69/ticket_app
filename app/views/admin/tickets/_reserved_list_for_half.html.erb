@@ -5,7 +5,7 @@
 <div class="d-flex flex-wrap flex-row justify-content-between">
   <% @tickets.each do |ticket| %>
     <table class="ticket-card-table">
-      <tr class="b-bottom b-right">
+      <tr class="b-right">
         <td colspan="8" class="ticket-card-table__title ">フリガナ</td>
         <td colspan="4" rowspan="2" class="text-center b-left ticket-card-table__title">取扱者</td>
       </tr>
@@ -14,7 +14,7 @@
         <td colspan="8" class="text-center"><%= ticket.furigana %></td>
       </tr>
 
-      <tr class="b-bottom b-right">
+      <tr class="b-right">
         <td colspan="8" class="ticket-card-table__title">名前</td>
         <td colspan="4" rowspan="3" class="text-center b-left"><%= ticket.user.name %></td>
       </tr>
