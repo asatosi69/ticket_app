@@ -19,8 +19,11 @@ body {
   background-color: rgba(0,0,0,.01) !important;
 }
 
-.table tr td, .table tr th {
-  page-break-inside: avoid;
+.page-brake {
+  display: block;
+  width: 0;
+  height: 0;
+  page-break-before: always !important;
 }
 
 .ticket-card-table {
@@ -30,6 +33,7 @@ body {
   table-layout: fixed;
   margin-bottom: 5px;
   font-size: 0.4rem;
+  page-break-inside: avoid !important;
 }
 .ticket-card-table__title {
   font-size: 0.5em;
