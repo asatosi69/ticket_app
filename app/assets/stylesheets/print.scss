@@ -2,7 +2,7 @@
 @page {
   /* size: A4 landscape; */
   size: A4;
-  margin: 19mm 16mm 19mm 16mm;
+  margin: 5mm 5mm 5mm 5mm;
 }
 body {
   -webkit-print-color-adjust: exact;
@@ -34,7 +34,7 @@ body {
   border: solid 1px;
   border-collapse: collapse;
   table-layout: fixed;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
   page-break-inside: avoid !important;
 }
 .ticket-card-table__title {
