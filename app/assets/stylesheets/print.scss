@@ -32,20 +32,22 @@ body {
   border-collapse: collapse;
   table-layout: fixed;
   margin-bottom: 5px;
-  font-size: 0.4rem;
   page-break-inside: avoid !important;
 }
 .ticket-card-table__title {
-  font-size: 0.5em;
+  font-size: 0.7em;
 }
 .ticket-card-table__tiny-text {
-  font-size: 0.3em;
+  font-size: 0.5em;
 }
 .ticket-card-table td:first-child:before {
   display: block;
   float: left;
   height: 18px;
   content: "";
+}
+.ticket-card-table tr {
+  height: 1rem;
 }
 tr.b-bottom--thin td {
   border-bottom: solid 1px #ccc;
