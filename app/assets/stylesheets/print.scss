@@ -24,6 +24,19 @@ body {
   page-break-after: always !important;
 }
 
+.print-title {
+  position: fixed;
+  height: 1em;
+  line-height: 1em;
+  display: block;
+  top: 0;
+  width: 100%;
+  background-color: white;
+}
+
+.ticket-card-table-wrap {
+  padding-top: 1em;
+}
 .ticket-card-table {
   width: 33%;
   border: solid 1px;
