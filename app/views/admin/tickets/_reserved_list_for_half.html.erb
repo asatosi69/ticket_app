@@ -4,7 +4,11 @@
 <%= @stage.performance %>の予約半券
 <div class="d-flex flex-wrap flex-row justify-content-between">
   <% @tickets.each.with_index(1) do |ticket, i| %>
-    <table class="ticket-card-table">
+    <%
+      table_classes = ['ticket-card-table']
+      table_classes << 'page-brake' if i % (3*6) == 0
+    %>
+    <table class="<%= table_classes.join(' ') %>">
       <tr class="b-right">
         <td colspan="8" class="ticket-card-table__title ">フリガナ</td>
         <td colspan="4" rowspan="2" class="text-center b-left ticket-card-table__title">取扱者</td>
@@ -57,8 +61,5 @@
         <td colspan="6" class="text-center"><%= ticket.created_at&.strftime('%Y年%m月%d日') %></td>
       </tr>
     </table>
-    <% if i % (3*6) == 0 %>
-      <div class="page-brake"></div>
-    <% end %>
   <% end %>
 </div>
