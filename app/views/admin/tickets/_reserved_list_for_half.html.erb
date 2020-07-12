@@ -1,11 +1,19 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" media="all">
 <%= stylesheet_link_tag 'print', media: "all" %>
 
+<% page_count = 0 %>
+<% total_page_count = (@tickets.size / (3*6).to_f).ceil %>
 <% @tickets.each.with_index(1) do |ticket, i| %>
   <% if (i-1) % (3*6) == 0 %>
-    <div class="print-title">
-      <%= @stage.performance %>の予約半券
-      <%= Time.current.strftime('%Y年%m月%d日 %H時%M分') %>
+    <% page_count += 1 %>
+    <div class="d-flex flex-row justify-content-between">
+      <div class="print-title">
+        <%= @stage.performance %>の予約半券
+        <%= Time.current.strftime('%Y年%m月%d日 %H時%M分') %>
+      </div>
+      <div class="print-page-number">
+        <%= "#{page_count}/#{total_page_count}" %>
+      </div>
     </div>
     <div class="d-flex flex-wrap flex-row justify-content-between">
   <% end %>
