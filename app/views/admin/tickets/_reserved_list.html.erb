@@ -8,6 +8,7 @@
 }
 </style>
 
+<% @tickets.each_slice(13) do |slice_tickets| # 13は、印刷時に格納できる上限行数 %>
 <%= @stage.performance %>の予約一覧
 <%= Time.current.strftime('%Y年%m月%d日 %H時%M分') %>
 <table class='table table-striped table-bordered'>
@@ -23,7 +24,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @tickets.each do |ticket| %>
+    <% slice_tickets.each do |ticket| %>
       <tr height="50px;">
         <td><%= ticket.furigana&.slice(0...8) %></td>
         <td><%= ticket.b_name&.slice(0...8) %></td>
